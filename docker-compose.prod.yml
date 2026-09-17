@@ -43,7 +43,7 @@ services:
     depends_on:
       - backend
     environment:
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://backend:8080}
+      - REMOTE_API_URL=http://backend:8080
       - PORT=3000
       - HOSTNAME=0.0.0.0
     networks:
