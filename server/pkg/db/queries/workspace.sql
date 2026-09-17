@@ -237,3 +237,8 @@ cleared_client_usage_workspace AS (
     UPDATE client_usage_daily SET workspace_id = NULL WHERE workspace_id = $1
 )
 DELETE FROM workspace WHERE workspace.id = $1;
+
+-- name: ListWorkspacesWhereUserIsOwner :many
+SELECT w.* FROM workspace w
+JOIN member m ON m.workspace_id = w.id
+WHERE m.user_id = $1 AND m.role = 'owner';

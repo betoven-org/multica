@@ -205,13 +205,19 @@ func (h *Handler) CreateWorkspace(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Self-host gate (#3433): when the operator has set
-	// DISABLE_WORKSPACE_CREATION=true, no caller — including existing
-	// workspace owners — may create additional workspaces. The frontend
-	// hides every "Create workspace" affordance via /api/config, but the
-	// 403 here is the only authoritative check.
+	// Self-host gate: only users who are already an owner of at least one
+	// workspace can create new workspaces. This prevents invited members
+	// from creating their own workspaces while allowing the instance admin
+	// to create workspaces freely. When DISABLE_WORKSPACE_CREATION=true,
+	// nobody can create workspaces (original behavior).
 	if h.cfg.DisableWorkspaceCreation {
 		writeError(w, http.StatusForbidden, "workspace creation is disabled for this instance")
+		return
+	}
+	// Check if user is owner of any existing workspace
+	ownedWorkspaces, err := h.Queries.ListWorkspacesWhereUserIsOwner(r.Context(), parseUUID(userID))
+	if err != nil || len(ownedWorkspaces) == 0 {
+		writeError(w, http.StatusForbidden, "only workspace owners can create new workspaces")
 		return
 	}
 
