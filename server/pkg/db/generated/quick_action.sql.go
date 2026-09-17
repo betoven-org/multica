@@ -124,7 +124,7 @@ func (q *Queries) DeleteQuickAction(ctx context.Context, arg DeleteQuickActionPa
 
 const getQuickAction = `-- name: GetQuickAction :one
 SELECT id, workspace_id, name, description, assignee_type, assignee_id, prompt, visibility, status, last_used_at, use_count, created_by_type, created_by_id, created_at, updated_at, is_global FROM quick_action
-WHERE id = $1 AND workspace_id = $2
+WHERE id = $1 AND (workspace_id = $2 OR is_global = true)
 `
 
 type GetQuickActionParams struct {

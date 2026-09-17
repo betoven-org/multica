@@ -4069,7 +4069,7 @@ func (q *Queries) GetAgentForUpdate(ctx context.Context, id pgtype.UUID) (Agent,
 
 const getAgentInWorkspace = `-- name: GetAgentInWorkspace :one
 SELECT id, workspace_id, name, avatar_url, runtime_mode, runtime_config, visibility, status, max_concurrent_tasks, owner_id, created_at, updated_at, description, runtime_id, instructions, archived_at, archived_by, custom_env, custom_args, mcp_config, model, thinking_level, composio_toolkit_allowlist, permission_mode, kind, system_key, disabled_runtime_skills, service_tier, conversation_starters, is_global FROM agent
-WHERE id = $1 AND workspace_id = $2 AND kind = 'user'
+WHERE id = $1 AND (workspace_id = $2 OR is_global = true) AND kind = 'user'
 `
 
 type GetAgentInWorkspaceParams struct {

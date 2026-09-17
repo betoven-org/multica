@@ -127,7 +127,7 @@ func (q *Queries) GetSkill(ctx context.Context, id pgtype.UUID) (Skill, error) {
 
 const getSkillByWorkspaceAndName = `-- name: GetSkillByWorkspaceAndName :one
 SELECT id, workspace_id, name, description, content, config, created_by, created_at, updated_at, plugin_installation_id, is_global FROM skill
-WHERE workspace_id = $1 AND name = $2
+WHERE (workspace_id = $1 OR is_global = true) AND name = $2
 `
 
 type GetSkillByWorkspaceAndNameParams struct {
@@ -177,7 +177,7 @@ func (q *Queries) GetSkillFile(ctx context.Context, id pgtype.UUID) (SkillFile, 
 
 const getSkillInWorkspace = `-- name: GetSkillInWorkspace :one
 SELECT id, workspace_id, name, description, content, config, created_by, created_at, updated_at, plugin_installation_id, is_global FROM skill
-WHERE id = $1 AND workspace_id = $2
+WHERE id = $1 AND (workspace_id = $2 OR is_global = true)
 `
 
 type GetSkillInWorkspaceParams struct {

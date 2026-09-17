@@ -36,7 +36,7 @@ FOR UPDATE;
 
 -- name: GetAgentInWorkspace :one
 SELECT * FROM agent
-WHERE id = $1 AND workspace_id = $2 AND kind = 'user';
+WHERE id = $1 AND (workspace_id = $2 OR is_global = true) AND kind = 'user';
 
 -- name: LockAgentForAutopilotAssignment :one
 -- Serializes creating, retargeting, or resuming an active Autopilot with

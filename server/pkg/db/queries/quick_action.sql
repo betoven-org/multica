@@ -15,7 +15,7 @@ ORDER BY use_count DESC, LOWER(name) ASC;
 
 -- name: GetQuickAction :one
 SELECT * FROM quick_action
-WHERE id = $1 AND workspace_id = $2;
+WHERE id = $1 AND (workspace_id = $2 OR is_global = true);
 
 -- name: CountActiveQuickActions :one
 SELECT COUNT(*) FROM quick_action

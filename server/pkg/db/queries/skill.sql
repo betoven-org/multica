@@ -21,13 +21,13 @@ WHERE id = $1;
 
 -- name: GetSkillInWorkspace :one
 SELECT * FROM skill
-WHERE id = $1 AND workspace_id = $2;
+WHERE id = $1 AND (workspace_id = $2 OR is_global = true);
 
 -- name: GetSkillByWorkspaceAndName :one
 -- Used by skill import and runtime-local skill discovery to reuse a workspace
 -- skill by name rather than violating UNIQUE(workspace_id, name).
 SELECT * FROM skill
-WHERE workspace_id = $1 AND name = $2;
+WHERE (workspace_id = $1 OR is_global = true) AND name = $2;
 
 -- name: CreateSkill :one
 INSERT INTO skill (workspace_id, name, description, content, config, created_by)
