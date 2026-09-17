@@ -687,7 +687,7 @@ export function AppSidebar({ topSlot, searchSlot, headerClassName, headerStyle }
                         )}
                       </DropdownMenuItem>
                     ))}
-                    {!workspaceCreationDisabled && (
+                    {!workspaceCreationDisabled && (currentRole === "owner" || currentRole === "admin") && (
                       <DropdownMenuItem
                         onClick={() => push(paths.newWorkspace())}
                       >
