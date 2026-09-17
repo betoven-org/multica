@@ -21,6 +21,9 @@ services:
       - "8080"
     environment:
       - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_MAX_CONNS=10
+      - DATABASE_MIN_CONNS=2
+      - MULTICA_DATABASE_STARTUP_TIMEOUT=5m
       - JWT_SECRET=${JWT_SECRET}
       - PORT=8080
       - DO_NOT_TRACK=true
