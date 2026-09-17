@@ -53,6 +53,10 @@ interface WorkspaceDetailsDraft {
   context: string;
 }
 
+interface ContractedHoursDraft {
+  contracted_hours_monthly: number;
+}
+
 function workspaceDetailsEqual(
   left: WorkspaceDetailsDraft,
   right: WorkspaceDetailsDraft,
@@ -131,6 +135,10 @@ export function WorkspaceTab() {
   const [description, setDescription] = useState(workspace?.description ?? "");
   const [context, setContext] = useState(workspace?.context ?? "");
   const [issuePrefix, setIssuePrefix] = useState(workspace?.issue_prefix ?? "");
+  const [contractedHours, setContractedHours] = useState<number>(
+    (workspace?.settings as Record<string, unknown>)?.contracted_hours_monthly as number ?? 0,
+  );
+  const [hoursSaveStatus, setHoursSaveStatus] = useState<SettingsSaveStatus>("idle");
   const [prefixSaveStatus, setPrefixSaveStatus] =
     useState<SettingsSaveStatus>("idle");
   const [actionId, setActionId] = useState<string | null>(null);
@@ -455,6 +463,52 @@ export function WorkspaceTab() {
                 placeholder={workspace.issue_prefix}
               />
           </SettingsRow>
+
+            <SettingsRow
+              label="Contracted hours (monthly)"
+              description="Monthly hours contracted with this client. Used to calculate usage % in timesheet reports."
+              size="text"
+            >
+              <div className="flex items-center gap-2">
+                <Input
+                  type="number"
+                  name="workspace-contracted-hours"
+                  autoComplete="off"
+                  aria-label="Contracted hours per month"
+                  value={contractedHours || ""}
+                  onChange={(event) => setContractedHours(Number(event.target.value))}
+                  onBlur={async () => {
+                    if (!workspace || !canManageWorkspace) return;
+                    setHoursSaveStatus("saving");
+                    try {
+                      await api.updateWorkspace(workspace.id, {
+                        settings: {
+                          ...(workspace.settings as Record<string, unknown>),
+                          contracted_hours_monthly: contractedHours,
+                        },
+                      });
+                      qc.setQueryData(workspaceKeys.list(), (old: Workspace[] | undefined) =>
+                        old?.map((ws) => (ws.id === workspace.id
+                          ? { ...ws, settings: { ...(ws.settings as Record<string, unknown>), contracted_hours_monthly: contractedHours } }
+                          : ws)),
+                      );
+                      setHoursSaveStatus("saved");
+                      toast.success("Contracted hours saved", { id: "contracted-hours-save" });
+                    } catch {
+                      setHoursSaveStatus("error");
+                      toast.error("Failed to save contracted hours");
+                    }
+                  }}
+                  disabled={!canManageWorkspace}
+                  min={0}
+                  step={1}
+                  className="w-24"
+                  placeholder="0"
+                />
+                <span className="text-sm text-muted-foreground">hours/month</span>
+                <SettingsSaveState status={hoursSaveStatus} />
+              </div>
+            </SettingsRow>
 
             {!canManageWorkspace && (
               <div className="px-4 py-3 text-caption text-muted-foreground">

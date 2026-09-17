@@ -13,44 +13,54 @@ import (
 // --- Request/Response types ---
 
 type CreateTimeEntryRequest struct {
-	IssueID      string `json:"issue_id"`
-	Minutes      int32  `json:"minutes"`
-	Description  string `json:"description"`
-	TaskType     string `json:"task_type"`
-	RiskLevel    string `json:"risk_level"`
-	LoggedByType string `json:"logged_by_type"`
+	IssueID         string `json:"issue_id"`
+	DurationSeconds int32  `json:"duration_seconds"`
+	Description     string `json:"description"`
+	TaskType        string `json:"task_type"`
+	RiskLevel       string `json:"risk_level"`
+	LoggedByType    string `json:"logged_by_type"`
 }
 
 type TimeEntryResponse struct {
-	ID           string `json:"id"`
-	WorkspaceID  string `json:"workspace_id"`
-	IssueID      string `json:"issue_id"`
-	LoggedByType string `json:"logged_by_type"`
-	LoggedByID   string `json:"logged_by_id"`
-	Minutes      int32  `json:"minutes"`
-	Description  string `json:"description"`
-	TaskType     string `json:"task_type"`
-	RiskLevel    string `json:"risk_level"`
-	Month        string `json:"month"`
-	CreatedAt    string `json:"created_at"`
+	ID              string `json:"id"`
+	WorkspaceID     string `json:"workspace_id"`
+	IssueID         string `json:"issue_id"`
+	LoggedByType    string `json:"logged_by_type"`
+	LoggedByID      string `json:"logged_by_id"`
+	DurationSeconds int32  `json:"duration_seconds"`
+	Duration        string `json:"duration"` // hh:mm:ss
+	Description     string `json:"description"`
+	TaskType        string `json:"task_type"`
+	RiskLevel       string `json:"risk_level"`
+	Month           string `json:"month"`
+	CreatedAt       string `json:"created_at"`
 }
 
 type TimesheetSummaryResponse struct {
-	WorkspaceID      string                  `json:"workspace_id"`
-	Month            string                  `json:"month"`
-	TotalMinutes     int64                   `json:"total_minutes"`
-	TotalHours       float64                 `json:"total_hours"`
-	ContractedHours  float64                 `json:"contracted_hours"`
-	UsagePercent     float64                 `json:"usage_percent"`
-	ByType           []TimesheetTypeBreakdown `json:"by_type"`
+	WorkspaceID     string                   `json:"workspace_id"`
+	Month           string                   `json:"month"`
+	TotalSeconds    int64                    `json:"total_seconds"`
+	TotalDuration   string                   `json:"total_duration"` // hh:mm:ss
+	TotalHours      float64                  `json:"total_hours"`
+	ContractedHours float64                  `json:"contracted_hours"`
+	UsagePercent    float64                  `json:"usage_percent"`
+	ByType          []TimesheetTypeBreakdown `json:"by_type"`
 }
 
 type TimesheetTypeBreakdown struct {
-	Month        string `json:"month"`
-	TaskType     string `json:"task_type"`
-	EntryCount   int64  `json:"entry_count"`
-	TotalMinutes int64  `json:"total_minutes"`
-	TotalHours   float64 `json:"total_hours"`
+	Month         string  `json:"month"`
+	TaskType      string  `json:"task_type"`
+	EntryCount    int64   `json:"entry_count"`
+	TotalSeconds  int64   `json:"total_seconds"`
+	TotalDuration string  `json:"total_duration"` // hh:mm:ss
+	TotalHours    float64 `json:"total_hours"`
+}
+
+func formatDuration(seconds int64) string {
+	h := seconds / 3600
+	m := (seconds % 3600) / 60
+	s := seconds % 60
+	return fmt.Sprintf("%02d:%02d:%02d", h, m, s)
 }
 
 // --- Handlers ---
@@ -68,8 +78,8 @@ func (h *Handler) CreateTimeEntry(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if req.IssueID == "" || req.Minutes <= 0 {
-		writeError(w, http.StatusBadRequest, "issue_id and minutes > 0 are required")
+	if req.IssueID == "" || req.DurationSeconds <= 0 {
+		writeError(w, http.StatusBadRequest, "issue_id and duration_seconds > 0 are required")
 		return
 	}
 
@@ -79,7 +89,6 @@ func (h *Handler) CreateTimeEntry(w http.ResponseWriter, r *http.Request) {
 	}
 
 	month := time.Now().UTC().Format("2006-01")
-
 	userID := requestUserID(r)
 	var loggedByID pgtype.UUID
 	if userID != "" {
@@ -87,15 +96,15 @@ func (h *Handler) CreateTimeEntry(w http.ResponseWriter, r *http.Request) {
 	}
 
 	entry, err := h.Queries.CreateTimeEntry(r.Context(), db.CreateTimeEntryParams{
-		WorkspaceID:  parseUUID(workspaceID),
-		IssueID:      parseUUID(req.IssueID),
-		LoggedByType: loggedByType,
-		LoggedByID:   loggedByID,
-		Minutes:      req.Minutes,
-		Description:  req.Description,
-		TaskType:     req.TaskType,
-		RiskLevel:    req.RiskLevel,
-		Month:        month,
+		WorkspaceID:     parseUUID(workspaceID),
+		IssueID:         parseUUID(req.IssueID),
+		LoggedByType:    loggedByType,
+		LoggedByID:      loggedByID,
+		DurationSeconds: req.DurationSeconds,
+		Description:     req.Description,
+		TaskType:        req.TaskType,
+		RiskLevel:       req.RiskLevel,
+		Month:           month,
 	})
 	if err != nil {
 		writeError(w, http.StatusInternalServerError, fmt.Sprintf("failed to create time entry: %v", err))
@@ -145,8 +154,7 @@ func (h *Handler) GetTimesheetSummary(w http.ResponseWriter, r *http.Request) {
 		month = time.Now().UTC().Format("2006-01")
 	}
 
-	// Total minutes
-	total, err := h.Queries.SumTimeByWorkspaceMonth(r.Context(), db.SumTimeByWorkspaceMonthParams{
+	totalSeconds, err := h.Queries.SumTimeByWorkspaceMonth(r.Context(), db.SumTimeByWorkspaceMonthParams{
 		WorkspaceID: parseUUID(workspaceID),
 		Month:       month,
 	})
@@ -155,7 +163,6 @@ func (h *Handler) GetTimesheetSummary(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Breakdown by type
 	breakdown, err := h.Queries.SumTimeByWorkspaceMonthGrouped(r.Context(), db.SumTimeByWorkspaceMonthGroupedParams{
 		WorkspaceID: parseUUID(workspaceID),
 		Month:       month,
@@ -166,7 +173,6 @@ func (h *Handler) GetTimesheetSummary(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Get contracted hours from workspace settings
 	ws, err := h.Queries.GetWorkspace(r.Context(), parseUUID(workspaceID))
 	if err != nil {
 		writeError(w, http.StatusInternalServerError, "failed to get workspace")
@@ -182,8 +188,7 @@ func (h *Handler) GetTimesheetSummary(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	totalMinutes := total
-	totalHours := float64(totalMinutes) / 60.0
+	totalHours := float64(totalSeconds) / 3600.0
 	usagePercent := 0.0
 	if contractedHours > 0 {
 		usagePercent = (totalHours / contractedHours) * 100
@@ -192,18 +197,20 @@ func (h *Handler) GetTimesheetSummary(w http.ResponseWriter, r *http.Request) {
 	byType := make([]TimesheetTypeBreakdown, len(breakdown))
 	for i, b := range breakdown {
 		byType[i] = TimesheetTypeBreakdown{
-			Month:        b.Month,
-			TaskType:     b.TaskType,
-			EntryCount:   b.EntryCount,
-			TotalMinutes: b.TotalMinutes,
-			TotalHours:   float64(b.TotalMinutes) / 60.0,
+			Month:         b.Month,
+			TaskType:      b.TaskType,
+			EntryCount:    b.EntryCount,
+			TotalSeconds:  b.TotalSeconds,
+			TotalDuration: formatDuration(b.TotalSeconds),
+			TotalHours:    float64(b.TotalSeconds) / 3600.0,
 		}
 	}
 
 	writeJSON(w, http.StatusOK, TimesheetSummaryResponse{
 		WorkspaceID:     workspaceID,
 		Month:           month,
-		TotalMinutes:    totalMinutes,
+		TotalSeconds:    totalSeconds,
+		TotalDuration:   formatDuration(totalSeconds),
 		TotalHours:      totalHours,
 		ContractedHours: contractedHours,
 		UsagePercent:    usagePercent,
@@ -213,16 +220,17 @@ func (h *Handler) GetTimesheetSummary(w http.ResponseWriter, r *http.Request) {
 
 func timeEntryToResponse(e db.TimeEntry) TimeEntryResponse {
 	return TimeEntryResponse{
-		ID:           uuidToString(e.ID),
-		WorkspaceID:  uuidToString(e.WorkspaceID),
-		IssueID:      uuidToString(e.IssueID),
-		LoggedByType: e.LoggedByType,
-		LoggedByID:   uuidToString(e.LoggedByID),
-		Minutes:      e.Minutes,
-		Description:  e.Description,
-		TaskType:     e.TaskType,
-		RiskLevel:    e.RiskLevel,
-		Month:        e.Month,
-		CreatedAt:    e.CreatedAt.Time.Format(time.RFC3339),
+		ID:              uuidToString(e.ID),
+		WorkspaceID:     uuidToString(e.WorkspaceID),
+		IssueID:         uuidToString(e.IssueID),
+		LoggedByType:    e.LoggedByType,
+		LoggedByID:      uuidToString(e.LoggedByID),
+		DurationSeconds: e.DurationSeconds,
+		Duration:        formatDuration(int64(e.DurationSeconds)),
+		Description:     e.Description,
+		TaskType:        e.TaskType,
+		RiskLevel:       e.RiskLevel,
+		Month:           e.Month,
+		CreatedAt:       e.CreatedAt.Time.Format(time.RFC3339),
 	}
 }

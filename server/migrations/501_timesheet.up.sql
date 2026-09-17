@@ -11,8 +11,10 @@ CREATE TABLE time_entry (
     -- Who logged: pipeline (automatic) or member (manual)
     logged_by_type TEXT NOT NULL DEFAULT 'pipeline' CHECK (logged_by_type IN ('pipeline', 'member')),
     logged_by_id UUID,
-    -- Time in minutes (human-equivalent estimate)
-    minutes INT NOT NULL CHECK (minutes > 0),
+    -- Duration in seconds (displayed as hh:mm:ss)
+    duration_seconds INT NOT NULL CHECK (duration_seconds > 0),
+    -- Legacy minutes column (kept for backwards compat, derived from duration_seconds)
+    minutes INT NOT NULL DEFAULT 0,
     -- Description of what was done
     description TEXT NOT NULL DEFAULT '',
     -- Task metadata at time of logging

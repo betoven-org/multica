@@ -1439,17 +1439,18 @@ type TaskUsageHourlyRollupState struct {
 }
 
 type TimeEntry struct {
-	ID           pgtype.UUID        `json:"id"`
-	WorkspaceID  pgtype.UUID        `json:"workspace_id"`
-	IssueID      pgtype.UUID        `json:"issue_id"`
-	LoggedByType string             `json:"logged_by_type"`
-	LoggedByID   pgtype.UUID        `json:"logged_by_id"`
-	Minutes      int32              `json:"minutes"`
-	Description  string             `json:"description"`
-	TaskType     string             `json:"task_type"`
-	RiskLevel    string             `json:"risk_level"`
-	Month        string             `json:"month"`
-	CreatedAt    pgtype.Timestamptz `json:"created_at"`
+	ID              pgtype.UUID        `json:"id"`
+	WorkspaceID     pgtype.UUID        `json:"workspace_id"`
+	IssueID         pgtype.UUID        `json:"issue_id"`
+	LoggedByType    string             `json:"logged_by_type"`
+	LoggedByID      pgtype.UUID        `json:"logged_by_id"`
+	DurationSeconds int32              `json:"duration_seconds"`
+	Minutes         int32              `json:"minutes"`
+	Description     string             `json:"description"`
+	TaskType        string             `json:"task_type"`
+	RiskLevel       string             `json:"risk_level"`
+	Month           string             `json:"month"`
+	CreatedAt       pgtype.Timestamptz `json:"created_at"`
 }
 
 type User struct {

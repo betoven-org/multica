@@ -12,21 +12,21 @@ import (
 )
 
 const createTimeEntry = `-- name: CreateTimeEntry :one
-INSERT INTO time_entry (workspace_id, issue_id, logged_by_type, logged_by_id, minutes, description, task_type, risk_level, month)
-VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-RETURNING id, workspace_id, issue_id, logged_by_type, logged_by_id, minutes, description, task_type, risk_level, month, created_at
+INSERT INTO time_entry (workspace_id, issue_id, logged_by_type, logged_by_id, duration_seconds, minutes, description, task_type, risk_level, month)
+VALUES ($1, $2, $3, $4, $5, $5 / 60, $6, $7, $8, $9)
+RETURNING id, workspace_id, issue_id, logged_by_type, logged_by_id, duration_seconds, minutes, description, task_type, risk_level, month, created_at
 `
 
 type CreateTimeEntryParams struct {
-	WorkspaceID  pgtype.UUID `json:"workspace_id"`
-	IssueID      pgtype.UUID `json:"issue_id"`
-	LoggedByType string      `json:"logged_by_type"`
-	LoggedByID   pgtype.UUID `json:"logged_by_id"`
-	Minutes      int32       `json:"minutes"`
-	Description  string      `json:"description"`
-	TaskType     string      `json:"task_type"`
-	RiskLevel    string      `json:"risk_level"`
-	Month        string      `json:"month"`
+	WorkspaceID     pgtype.UUID `json:"workspace_id"`
+	IssueID         pgtype.UUID `json:"issue_id"`
+	LoggedByType    string      `json:"logged_by_type"`
+	LoggedByID      pgtype.UUID `json:"logged_by_id"`
+	DurationSeconds int32       `json:"duration_seconds"`
+	Description     string      `json:"description"`
+	TaskType        string      `json:"task_type"`
+	RiskLevel       string      `json:"risk_level"`
+	Month           string      `json:"month"`
 }
 
 func (q *Queries) CreateTimeEntry(ctx context.Context, arg CreateTimeEntryParams) (TimeEntry, error) {
@@ -35,7 +35,7 @@ func (q *Queries) CreateTimeEntry(ctx context.Context, arg CreateTimeEntryParams
 		arg.IssueID,
 		arg.LoggedByType,
 		arg.LoggedByID,
-		arg.Minutes,
+		arg.DurationSeconds,
 		arg.Description,
 		arg.TaskType,
 		arg.RiskLevel,
@@ -48,6 +48,7 @@ func (q *Queries) CreateTimeEntry(ctx context.Context, arg CreateTimeEntryParams
 		&i.IssueID,
 		&i.LoggedByType,
 		&i.LoggedByID,
+		&i.DurationSeconds,
 		&i.Minutes,
 		&i.Description,
 		&i.TaskType,
@@ -73,7 +74,7 @@ func (q *Queries) DeleteTimeEntry(ctx context.Context, arg DeleteTimeEntryParams
 }
 
 const listTimeEntriesByIssue = `-- name: ListTimeEntriesByIssue :many
-SELECT id, workspace_id, issue_id, logged_by_type, logged_by_id, minutes, description, task_type, risk_level, month, created_at FROM time_entry
+SELECT id, workspace_id, issue_id, logged_by_type, logged_by_id, duration_seconds, minutes, description, task_type, risk_level, month, created_at FROM time_entry
 WHERE issue_id = $1
 ORDER BY created_at DESC
 `
@@ -93,6 +94,7 @@ func (q *Queries) ListTimeEntriesByIssue(ctx context.Context, issueID pgtype.UUI
 			&i.IssueID,
 			&i.LoggedByType,
 			&i.LoggedByID,
+			&i.DurationSeconds,
 			&i.Minutes,
 			&i.Description,
 			&i.TaskType,
@@ -111,7 +113,7 @@ func (q *Queries) ListTimeEntriesByIssue(ctx context.Context, issueID pgtype.UUI
 }
 
 const listTimeEntriesByWorkspaceMonth = `-- name: ListTimeEntriesByWorkspaceMonth :many
-SELECT id, workspace_id, issue_id, logged_by_type, logged_by_id, minutes, description, task_type, risk_level, month, created_at FROM time_entry
+SELECT id, workspace_id, issue_id, logged_by_type, logged_by_id, duration_seconds, minutes, description, task_type, risk_level, month, created_at FROM time_entry
 WHERE workspace_id = $1 AND month = $2
 ORDER BY created_at DESC
 `
@@ -136,6 +138,7 @@ func (q *Queries) ListTimeEntriesByWorkspaceMonth(ctx context.Context, arg ListT
 			&i.IssueID,
 			&i.LoggedByType,
 			&i.LoggedByID,
+			&i.DurationSeconds,
 			&i.Minutes,
 			&i.Description,
 			&i.TaskType,
@@ -154,7 +157,7 @@ func (q *Queries) ListTimeEntriesByWorkspaceMonth(ctx context.Context, arg ListT
 }
 
 const sumTimeByWorkspaceMonth = `-- name: SumTimeByWorkspaceMonth :one
-SELECT COALESCE(SUM(minutes), 0)::bigint AS total_minutes
+SELECT COALESCE(SUM(duration_seconds), 0)::bigint AS total_seconds
 FROM time_entry
 WHERE workspace_id = $1 AND month = $2
 `
@@ -166,9 +169,9 @@ type SumTimeByWorkspaceMonthParams struct {
 
 func (q *Queries) SumTimeByWorkspaceMonth(ctx context.Context, arg SumTimeByWorkspaceMonthParams) (int64, error) {
 	row := q.db.QueryRow(ctx, sumTimeByWorkspaceMonth, arg.WorkspaceID, arg.Month)
-	var total_minutes int64
-	err := row.Scan(&total_minutes)
-	return total_minutes, err
+	var total_seconds int64
+	err := row.Scan(&total_seconds)
+	return total_seconds, err
 }
 
 const sumTimeByWorkspaceMonthGrouped = `-- name: SumTimeByWorkspaceMonthGrouped :many
@@ -176,11 +179,11 @@ SELECT
     month,
     task_type,
     COUNT(*)::bigint AS entry_count,
-    COALESCE(SUM(minutes), 0)::bigint AS total_minutes
+    COALESCE(SUM(duration_seconds), 0)::bigint AS total_seconds
 FROM time_entry
 WHERE workspace_id = $1 AND month >= $2 AND month <= $3
 GROUP BY month, task_type
-ORDER BY month DESC, total_minutes DESC
+ORDER BY month DESC, total_seconds DESC
 `
 
 type SumTimeByWorkspaceMonthGroupedParams struct {
@@ -193,7 +196,7 @@ type SumTimeByWorkspaceMonthGroupedRow struct {
 	Month        string `json:"month"`
 	TaskType     string `json:"task_type"`
 	EntryCount   int64  `json:"entry_count"`
-	TotalMinutes int64  `json:"total_minutes"`
+	TotalSeconds int64  `json:"total_seconds"`
 }
 
 func (q *Queries) SumTimeByWorkspaceMonthGrouped(ctx context.Context, arg SumTimeByWorkspaceMonthGroupedParams) ([]SumTimeByWorkspaceMonthGroupedRow, error) {
@@ -209,7 +212,7 @@ func (q *Queries) SumTimeByWorkspaceMonthGrouped(ctx context.Context, arg SumTim
 			&i.Month,
 			&i.TaskType,
 			&i.EntryCount,
-			&i.TotalMinutes,
+			&i.TotalSeconds,
 		); err != nil {
 			return nil, err
 		}
