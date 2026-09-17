@@ -152,5 +152,100 @@
     "returning_subtitle": "Tente perguntar",
     "chat_with_named": "Chat com {{name}}"
   },
-  "conversation_starters": {}
+  "conversation_starters": {
+    "aria_label": "Iniciadores de conversa",
+    "capabilities": {
+      "label": "Com o que você pode me ajudar?",
+      "prompt": "No que você é melhor em ajudar? Dê-me um resumo conciso."
+    },
+    "first_task": {
+      "label": "Sugerir uma primeira issue",
+      "prompt": "Sugira três issues úteis que eu poderia atribuir a você."
+    },
+    "recommend": {
+      "label": "Recomendar uma ação",
+      "prompt": "Revise o que você sabe sobre meu workspace e recomende uma ação útil como primeiro passo."
+    },
+    "customize": "Personalizar iniciadores"
+  },
+  "onboarding_cards": {
+    "aria_label": "Formas de começar",
+    "cta": "Começar",
+    "board": {
+      "title": "Configure um quadro em minutos",
+      "desc": "Me conte o objetivo — vou criar o projeto, dividir as tarefas e definir prioridades.",
+      "prompt": "Transforme nossos objetivos atuais em um quadro de projeto"
+    },
+    "delegate": {
+      "title": "Me passe uma coisa primeiro",
+      "desc": "Um trabalho de pesquisa rápido — os resultados voltam como uma tarefa e um relatório.",
+      "prompt": "Retire uma coisa da minha lista: realize uma rápida pesquisa e envie os resultados de volta como um relatório"
+    },
+    "digest": {
+      "title": "Deixe o resumo diário se escrever",
+      "desc": "Um resumo matinal do progresso do workspace, direto na sua caixa de entrada.",
+      "prompt": "Configure uma automação diária que publica um resumo matinal do progresso do workspace"
+    },
+    "digest_badge": "Diário 9:00"
+  },
+  "no_agent_banner": "Você precisa de um agente para começar a conversar.",
+  "archived_agent_banner": "{{name}} foi arquivado — esta conversa é somente leitura.",
+  "agent_access_revoked_banner": "Você não tem mais permissão para executar {{name}} — esta conversa é somente leitura.",
+  "runtime_required_banner": {
+    "fallback_name": "O agente",
+    "message": "{{name}} precisa de um runtime antes de poder responder.",
+    "action": "Vincular runtime"
+  },
+  "offline_banner": {
+    "fallback_name": "o agente",
+    "unstable": "A conexão de {{name}} está instável — respostas podem ser atrasadas.",
+    "offline": "{{name}} está offline — sua mensagem será entregue quando voltar."
+  },
+  "status_pill": {
+    "stages": {
+      "offline": "Offline",
+      "reconnecting": "Reconectando",
+      "retrying": "Tentando novamente",
+      "queued": "Na fila",
+      "waiting_local_directory": "Aguardando diretório local",
+      "waiting_local_directory_reason": "Aguardando {{reason}}",
+      "starting_up": "Iniciando",
+      "thinking": "Pensando",
+      "typing": "Digitando"
+    },
+    "tools": {
+      "running_command": "Executando um comando",
+      "reading_files": "Lendo arquivos",
+      "searching_code": "Pesquisando o código",
+      "making_edits": "Fazendo edições",
+      "searching_web": "Pesquisando a web",
+      "fallback": "Trabalhando"
+    }
+  },
+  "list": {
+    "typing": "Digitando…",
+    "failed": "Falha ao enviar",
+    "you_prefix": "Você: ",
+    "no_messages": "Nenhuma mensagem ainda",
+    "no_response_preview": "Sem resposta de texto",
+    "quick_agents": "Agentes frequentes",
+    "add": "Adicionar",
+    "add_agent": "Adicionar um agente frequente",
+    "unpin_agent": "Remover dos frequentes",
+    "waiting": "Aguardando resposta",
+    "pin": "Fixar",
+    "unpin": "Desafixar",
+    "pinned": "Fixado",
+    "archive": "Arquivar",
+    "unarchive": "Desarquivar",
+    "archived_title": "Arquivado",
+    "row_actions_aria": "Ações do chat"
+  },
+  "header": {
+    "view_profile": "Ver perfil do agente",
+    "rename": "Renomear conversa",
+    "archive": "Arquivar conversa",
+    "unarchive": "Desarquivar conversa",
+    "delete": "Deletar conversa"
+  }
 }
