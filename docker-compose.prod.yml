@@ -1,0 +1,50 @@
+# Production Docker Compose — Coolify deployment
+# Builds backend and frontend from source, connects to external Supabase DB.
+#
+# Required env vars (set in Coolify):
+#   DATABASE_URL    — Supabase connection string
+#   JWT_SECRET      — openssl rand -hex 32
+#
+# Optional:
+#   RESEND_API_KEY  — for email verification (without it, codes go to logs)
+#   RESEND_FROM_EMAIL — sender email
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VERSION: ${VERSION:-prod}
+        COMMIT: ${COMMIT:-unknown}
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - PORT=8080
+      - DO_NOT_TRACK=true
+      - ANALYTICS_DISABLED=true
+      - RESEND_API_KEY=${RESEND_API_KEY:-}
+      - RESEND_FROM_EMAIL=${RESEND_FROM_EMAIL:-noreply@oduscommerce.com.br}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      args:
+        NEXT_PUBLIC_APP_VERSION: ${VERSION:-prod}
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://backend:8080}
+    restart: unless-stopped
