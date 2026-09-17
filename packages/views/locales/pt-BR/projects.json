@@ -127,7 +127,7 @@
     "mode_worktree_title": "Executar em paralelo, isolado",
     "mode_worktree_description": "As execuções ocorrem simultaneamente sem tocar sua cópia de trabalho. Cada uma retorna um branch agente/... neste repositório para você revisar e fazer merge.",
     "mode_worktree_needs_git": "Esta pasta não é um repositório git, portanto não há lugar para colocar o branch. Selecione um repositório ou continue editando a pasta diretamente.",
-    "mode_worktree_needs_server_upgrade": "Seu servidor Multica é muito antigo para executar em paralelo — executaria silenciosamente nesta pasta. Atualize o servidor e depois ative isso.",
+    "mode_worktree_needs_server_upgrade": "Seu servidor Odus é muito antigo para executar em paralelo — executaria silenciosamente nesta pasta. Atualize o servidor e depois ative isso.",
     "mode_cancel": "Cancelar",
     "mode_save": "Salvar",
     "mode_add": "Adicionar pasta",

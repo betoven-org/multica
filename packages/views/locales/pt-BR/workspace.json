@@ -17,13 +17,13 @@
   "new_page": {
     "back": "Voltar",
     "log_out": "Sair",
-    "title": "Bem-vindo ao Multica",
+    "title": "Bem-vindo ao Odus",
     "description": "Um workspace onde você e seus agentes IA trabalham lado a lado — pegando tarefas, deixando comentários, compartilhando o mesmo contexto.",
     "invite_hint": "Você pode convidar companheiros de equipe quando seu workspace estiver pronto."
   },
   "creation_disabled": {
     "title": "Criação de workspace desabilitada",
-    "description": "Esta instância do Multica não permite a criação de novos workspaces. Peça a um administrador um convite para um workspace existente."
+    "description": "Esta instância do Odus não permite a criação de novos workspaces. Peça a um administrador um convite para um workspace existente."
   },
   "no_access": {
     "title": "Workspace não disponível",

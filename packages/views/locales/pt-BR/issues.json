@@ -782,7 +782,7 @@
       "open_link": "Abrir link",
       "archived_hint": "Propriedade arquivada — o valor é somente leitura",
       "unknown_value": "Indisponível",
-      "unknown_value_hint": "Este valor foi definido por uma versão mais recente do Multica e não pode ser editado aqui — atualize o aplicativo ou limpe-o"
+      "unknown_value_hint": "Este valor foi definido por uma versão mais recente do Odus e não pode ser editado aqui — atualize o aplicativo ou limpe-o"
     },
     "filter_options_aria": "Opções de filtro",
     "no_results": "Nenhum resultado",

@@ -259,6 +259,6 @@
     "workspace_missing_title": "Não foi possível encontrar aquele workspace",
     "workspace_missing_description": "Você voltou do Stripe, mas este workspace não está mais disponível para você — pode ter sido removido ou seu acesso mudou. Abra Faturamento no workspace que você esperava para verificar o estado atual.",
     "retry": "Tentar novamente",
-    "go_to_app": "Ir para Multica"
+    "go_to_app": "Ir para Odus"
   }
 }

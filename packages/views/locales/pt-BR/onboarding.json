@@ -1,6 +1,6 @@
 {
   "step_nav": {
-    "wordmark": "Multica",
+    "wordmark": "Odus",
     "label": "Passos de integração",
     "about_you": {
       "label": "Sobre você"
@@ -13,7 +13,7 @@
     }
   },
   "welcome": {
-    "wordmark": "Bem-vindo ao Multica",
+    "wordmark": "Bem-vindo ao Odus",
     "headline_line1": "Seus colegas de IA,",
     "headline_line2": "em",
     "headline_emphasis": "um workspace.",
@@ -54,7 +54,7 @@
   },
   "source_backfill": {
     "eyebrow": "Pergunta rápida",
-    "lede": "Ajude-nos a entender como você encontrou Multica.",
+    "lede": "Ajude-nos a entender como você encontrou Odus.",
     "submit": "Enviar",
     "save_failed_toast": "Falha ao salvar"
   },
@@ -63,7 +63,7 @@
       "question": "Conte-nos um pouco sobre você."
     },
     "source": {
-      "question": "Como você conheceu Multica?",
+      "question": "Como você conheceu Odus?",
       "friends_colleagues": "Amigos ou colegas",
       "search": "Google / busca",
       "social_x": "X / Twitter",
@@ -94,7 +94,7 @@
       "other_placeholder": "ex: professor, líder de suporte"
     },
     "use_case": {
-      "question": "Para que você quer usar Multica?",
+      "question": "Para que você quer usar Odus?",
       "ship_code": "Enviar código com agentes de IA",
       "manage_team": "Gerenciar tarefas da minha equipe",
       "personal_tasks": "Organizar minhas próprias tarefas",
@@ -116,7 +116,7 @@
   "cli_install": {
     "copy_aria": "Copiar",
     "intro": "Você precisará de um runtime de agente neste computador (Claude Code, Codex, Cursor, …) para executar seu agente. Também funciona em servidores e caixas de dev remotas.",
-    "step1_label": "Instale o CLI Multica",
+    "step1_label": "Instale o CLI Odus",
     "step2_label": "Inicie o daemon"
   },
   "cloud_waitlist": {
@@ -135,7 +135,7 @@
   "welcome_after_onboarding": {
     "skip": {
       "loading": "Configurando seu workspace…",
-      "title": "Bem-vindo ao Multica!",
+      "title": "Bem-vindo ao Odus!",
       "subtitle": "Adicionamos uma issue para ajudá-lo a conectar um runtime. Quando estiver pronto, comece com Mika em Runtimes.",
       "got_it": "Entendi",
       "status_in_progress": "Em andamento",
@@ -185,7 +185,7 @@
     "create_failed_toast": "Falha ao criar workspace",
     "creation_disabled_eyebrow": "Criação de workspace desabilitada",
     "creation_disabled_headline": "Peça a um administrador um convite.",
-    "creation_disabled_lede": "Esta instância Multica não permite a criação de novos workspaces. Assim que um administrador o convidar para um workspace, aceite o",
+    "creation_disabled_lede": "Esta instância Odus não permite a criação de novos workspaces. Assim que um administrador o convidar para um workspace, aceite o",
     "creation_disabled_logout": "Log out",
     "creation_disabled_eyebrow_resume": "Your workspace",
     "creation_disabled_headline_resume": "Continue with {{name}}.",

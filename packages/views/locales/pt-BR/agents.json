@@ -466,12 +466,12 @@
       "intro": "Defina o prompt de sistema usado em cada execução. Markdown é suportado.",
       "system_prompt_label": "Prompt de sistema",
       "placeholder": "Defina o papel, a especialidade e o estilo de trabalho deste agent.\n\n# Exemplo\nVocê é um engenheiro frontend especializado em React e TypeScript.\n\n## Estilo de Trabalho\n- Escreva PRs pequenos e focados — um commit por mudança lógica\n- Prefira composição à herança\n- Sempre adicione testes unitários para novos componentes\n\n## Restrições\n- Não modifique os tipos em shared/ sem aprovação explícita\n- Siga os padrões de componentes existentes em features/",
-      "system_layer_label": "Mantido pela Multica",
-      "system_layer_hint": "Atualizado a cada versão da Multica. Você não pode editá-lo, e suas notas abaixo nunca são sobrescritas.",
+      "system_layer_label": "Mantido pela Odus",
+      "system_layer_hint": "Atualizado a cada versão da Odus. Você não pode editá-lo, e suas notas abaixo nunca são sobrescritas.",
       "system_layer_show": "Mostrar",
       "system_layer_hide": "Ocultar",
       "workspace_notes_label": "Notas do workspace",
-      "workspace_notes_intro": "Adicione o contexto e as preferências da sua equipe abaixo. Elas se aplicam sobre as instruções que a Multica mantém para este agent. Markdown é suportado.",
+      "workspace_notes_intro": "Adicione o contexto e as preferências da sua equipe abaixo. Elas se aplicam sobre as instruções que a Odus mantém para este agent. Markdown é suportado.",
       "workspace_notes_placeholder": "Adicione contexto que este agent deve sempre ter.\n\n# Exemplo\nNosso repositório principal é github.com/acme/platform.\nEscreva issues em inglês mesmo quando conversamos em chinês.\nNão fazemos deploy às sextas-feiras."
     },
     "env": {
@@ -524,12 +524,12 @@
       "save_failed_toast": "Falha ao salvar argumentos personalizados"
     },
     "mcp_config": {
-      "managed_title": "Gerenciado pela Multica",
-      "managed_empty": "Nenhum servidor MCP é gerenciado pela Multica ainda.",
+      "managed_title": "Gerenciado pela Odus",
+      "managed_empty": "Nenhum servidor MCP é gerenciado pela Odus ainda.",
       "add_action": "Adicionar MCP",
       "agent_disabled_badge": "Desativado para o agent",
       "runtime_disabled_badge": "Desativado no runtime",
-      "runtime_overridden_badge": "Substituído pela Multica",
+      "runtime_overridden_badge": "Substituído pela Odus",
       "workspace_title": "Da biblioteca do workspace",
       "workspace_action_failed": "Não foi possível atualizar os servidores MCP deste agent",
       "workspace_removed_toast": "Servidor MCP removido deste agent",

@@ -5,10 +5,10 @@
     "agent_link_no_access": "Você não tem acesso para conversar com este agente."
   },
   "fab": {
-    "running": "Multica está trabalhando...",
+    "running": "Odus está trabalhando...",
     "unread_one": "{{count}} chat não lido",
     "unread_other": "{{count}} chats não lidos",
-    "default": "Pergunte ao Multica"
+    "default": "Pergunte ao Odus"
   },
   "input": {
     "placeholder_no_agent": "Crie um agente para começar a conversar",
@@ -148,7 +148,7 @@
     "first_time_pillars_suffix": ".",
     "first_time_actions": "Peça um resumo, planeje seu dia ou delegue uma tarefa rápida.",
     "returning_title_named": "Oi, sou {{name}}",
-    "returning_title_default": "Bem-vindo ao Multica",
+    "returning_title_default": "Bem-vindo ao Odus",
     "returning_subtitle": "Tente perguntar",
     "chat_with_named": "Chat com {{name}}"
   },

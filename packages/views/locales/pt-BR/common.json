@@ -45,7 +45,7 @@
   "lark_bind": {
     "page_title": "Vincular sua conta Lark",
     "redeeming": "Resgatando token de vinculação…",
-    "needs_auth_description": "Faça login no Multica para concluir a vinculação. O token no link vincula sua conta Lark a este usuário do Multica, então você deve estar logado primeiro.",
+    "needs_auth_description": "Faça login no Odus para concluir a vinculação. O token no link vincula sua conta Lark a este usuário do Odus, então você deve estar logado primeiro.",
     "sign_in": "Fazer login",
     "done_title": "Você está vinculado.",
     "done_description": "Sua próxima mensagem para o Bot no Lark irá direto para o agente. Você pode fechar esta aba.",
@@ -53,14 +53,14 @@
     "error_admin_hint": "Se isso continuar acontecendo, peça ao administrador do workspace para reenviar o link de vinculação do Lark.",
     "error_missing_token": "O link está faltando seu token de vinculação. Peça ao Bot para enviar um novo no Lark.",
     "error_expired": "Este link de vinculação é inválido ou expirou (links são válidos por 15 minutos). Peça ao Bot para enviar um novo.",
-    "error_already_bound": "Esta conta Lark já está vinculada a um usuário Multica diferente. Transferências de conta devem passar por um desvínculo explícito primeiro.",
-    "error_not_member": "Você está logado em uma conta Multica que não é membro deste workspace.",
+    "error_already_bound": "Esta conta Lark já está vinculada a um usuário Odus diferente. Transferências de conta devem passar por um desvínculo explícito primeiro.",
+    "error_not_member": "Você está logado em uma conta Odus que não é membro deste workspace.",
     "error_unknown": "Algo deu errado. Tente novamente e, se o problema persistir, entre em contato com o administrador do workspace."
   },
   "slack_bind": {
     "page_title": "Vincular sua conta Slack",
     "redeeming": "Vinculando sua conta…",
-    "needs_auth_description": "Faça login no Multica para concluir a vinculação. O token no link vincula sua conta Slack a este usuário do Multica, então você deve estar logado primeiro.",
+    "needs_auth_description": "Faça login no Odus para concluir a vinculação. O token no link vincula sua conta Slack a este usuário do Odus, então você deve estar logado primeiro.",
     "sign_in": "Fazer login",
     "done_title": "Você está vinculado.",
     "done_description": "Sua próxima mensagem para o bot no Slack irá direto para o agente. Você pode fechar esta aba.",
@@ -68,14 +68,14 @@
     "error_admin_hint": "Se isso continuar acontecendo, envie mensagem para o bot novamente no Slack para obter um novo link.",
     "error_missing_token": "O link está faltando seu token. Envie mensagem para o bot novamente no Slack para obter um novo.",
     "error_expired": "Este link é inválido ou expirou (links são válidos por 15 minutos). Envie mensagem para o bot novamente para obter um novo.",
-    "error_already_bound": "Esta conta Slack já está vinculada a um usuário Multica diferente. Transferências de conta devem passar por um desvínculo explícito primeiro.",
-    "error_not_member": "Você está logado em uma conta Multica que não é membro deste workspace.",
+    "error_already_bound": "Esta conta Slack já está vinculada a um usuário Odus diferente. Transferências de conta devem passar por um desvínculo explícito primeiro.",
+    "error_not_member": "Você está logado em uma conta Odus que não é membro deste workspace.",
     "error_unknown": "Algo deu errado. Tente novamente e, se o problema persistir, entre em contato com o administrador do workspace."
   },
   "dingtalk_bind": {
     "page_title": "Vincular sua conta DingTalk",
     "redeeming": "Vinculando sua conta…",
-    "needs_auth_description": "Faça login no Multica para concluir a vinculação. O token no link vincula sua conta DingTalk a este usuário do Multica, então você deve estar logado primeiro.",
+    "needs_auth_description": "Faça login no Odus para concluir a vinculação. O token no link vincula sua conta DingTalk a este usuário do Odus, então você deve estar logado primeiro.",
     "sign_in": "Fazer login",
     "done_title": "Você está vinculado.",
     "done_description": "Sua próxima mensagem para o bot no DingTalk irá direto para o agente. Você pode fechar esta aba.",
@@ -83,14 +83,14 @@
     "error_admin_hint": "Se isso continuar acontecendo, envie mensagem para o bot novamente no DingTalk para obter um novo link.",
     "error_missing_token": "O link está faltando seu token. Envie mensagem para o bot novamente no DingTalk para obter um novo.",
     "error_expired": "Este link é inválido ou expirou (links são válidos por 15 minutos). Envie mensagem para o bot novamente para obter um novo.",
-    "error_already_bound": "Esta conta DingTalk já está vinculada a um usuário Multica diferente. Transferências de conta devem passar por um desvínculo explícito primeiro.",
-    "error_not_member": "Você está logado em uma conta Multica que não é membro deste workspace.",
+    "error_already_bound": "Esta conta DingTalk já está vinculada a um usuário Odus diferente. Transferências de conta devem passar por um desvínculo explícito primeiro.",
+    "error_not_member": "Você está logado em uma conta Odus que não é membro deste workspace.",
     "error_unknown": "Algo deu errado. Tente novamente e, se o problema persistir, entre em contato com o administrador do workspace."
   },
   "telegram_bind": {
     "page_title": "Vincular sua conta Telegram",
     "redeeming": "Vinculando sua conta…",
-    "needs_auth_description": "Faça login no Multica para concluir a vinculação. O token no link vincula sua conta Telegram a este usuário do Multica, então você deve estar logado primeiro.",
+    "needs_auth_description": "Faça login no Odus para concluir a vinculação. O token no link vincula sua conta Telegram a este usuário do Odus, então você deve estar logado primeiro.",
     "sign_in": "Fazer login",
     "done_title": "Você está vinculado.",
     "done_description": "Sua próxima mensagem para o bot no Telegram irá direto para o agente. Você pode fechar esta aba.",
@@ -98,8 +98,8 @@
     "error_admin_hint": "Se isso continuar acontecendo, envie mensagem para o bot novamente no Telegram para obter um novo link.",
     "error_missing_token": "O link está faltando seu token. Envie mensagem para o bot novamente no Telegram para obter um novo.",
     "error_expired": "Este link é inválido ou expirou (links são válidos por 15 minutos). Envie mensagem para o bot novamente para obter um novo.",
-    "error_already_bound": "Esta conta Telegram já está vinculada a um usuário Multica diferente. Transferências de conta devem passar por um desvínculo explícito primeiro.",
-    "error_not_member": "Você está logado em uma conta Multica que não é membro deste workspace.",
+    "error_already_bound": "Esta conta Telegram já está vinculada a um usuário Odus diferente. Transferências de conta devem passar por um desvínculo explícito primeiro.",
+    "error_not_member": "Você está logado em uma conta Odus que não é membro deste workspace.",
     "error_unknown": "Algo deu errado. Tente novamente e, se o problema persistir, entre em contato com o administrador do workspace."
   },
   "expandable_description": {
@@ -107,9 +107,9 @@
     "collapse": "Mostrar menos"
   },
   "wecom_bind": {
-    "page_title": "Vincular sua conta Multica",
+    "page_title": "Vincular sua conta Odus",
     "redeeming": "Vinculando sua conta…",
-    "needs_auth_description": "Faça login no Multica para concluir a vinculação. O token no link vincula sua identidade WeCom a este usuário do Multica, então você deve estar logado primeiro.",
+    "needs_auth_description": "Faça login no Odus para concluir a vinculação. O token no link vincula sua identidade WeCom a este usuário do Odus, então você deve estar logado primeiro.",
     "sign_in": "Fazer login",
     "done_title": "Você está vinculado.",
     "done_description": "Sua próxima mensagem para o bot inteligente no WeCom irá direto para o agente. Você pode fechar esta aba.",
@@ -117,14 +117,14 @@
     "error_admin_hint": "Se isso continuar acontecendo, envie mensagem para o bot novamente no WeCom para obter um novo link.",
     "error_missing_token": "O link está faltando seu token. Envie mensagem para o bot novamente no WeCom para obter um novo.",
     "error_expired": "Este link é inválido ou expirou (links são válidos por 15 minutos). Envie mensagem para o bot novamente para obter um novo.",
-    "error_already_bound": "Esta identidade WeCom já está vinculada a um usuário Multica diferente. Transferências de conta devem passar por um desvínculo explícito primeiro.",
-    "error_not_member": "Você está logado em uma conta Multica que não é membro deste workspace.",
+    "error_already_bound": "Esta identidade WeCom já está vinculada a um usuário Odus diferente. Transferências de conta devem passar por um desvínculo explícito primeiro.",
+    "error_not_member": "Você está logado em uma conta Odus que não é membro deste workspace.",
     "error_unknown": "Algo deu errado. Tente novamente e, se o problema persistir, entre em contato com o administrador do workspace."
   },
   "not_found": {
     "title": "Página não encontrada",
     "description": "A página que você está procurando não existe ou foi movida.",
-    "back_to_multica": "Voltar para Multica"
+    "back_to_Odus": "Voltar para Odus"
   },
   "navigation": {
     "open_in_new_tab": "Abrir em nova aba"
