@@ -20,10 +20,7 @@ services:
     expose:
       - "8080"
     environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - DATABASE_MAX_CONNS=10
-      - DATABASE_MIN_CONNS=2
-      - MULTICA_DATABASE_STARTUP_TIMEOUT=5m
+      - DATABASE_URL=${DATABASE_URL:-postgres://postgres:lrLB9lkKeIcKOnGfiLZi0hYLlQWkTXpyTDl94VuXnHXZaNpTAd4L31jy46k3T91n@gvwoxaj0myyrltulquhovu7x:5432/multica?sslmode=disable}
       - JWT_SECRET=${JWT_SECRET}
       - PORT=8080
       - DO_NOT_TRACK=true
