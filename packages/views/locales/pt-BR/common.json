@@ -124,7 +124,7 @@
   "not_found": {
     "title": "Página não encontrada",
     "description": "A página que você está procurando não existe ou foi movida.",
-    "back_to_Odus": "Voltar para Odus"
+    "back_to_multica": "Voltar para Odus"
   },
   "navigation": {
     "open_in_new_tab": "Abrir em nova aba"
