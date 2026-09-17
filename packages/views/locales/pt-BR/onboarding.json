@@ -1,0 +1,190 @@
+{
+  "step_nav": {
+    "wordmark": "Multica",
+    "label": "Passos de integração",
+    "about_you": {
+      "label": "Sobre você"
+    },
+    "workspace": {
+      "label": "Workspace"
+    },
+    "runtime": {
+      "label": "Conheça Mika"
+    }
+  },
+  "welcome": {
+    "wordmark": "Bem-vindo ao Multica",
+    "headline_line1": "Seus colegas de IA,",
+    "headline_line2": "em",
+    "headline_emphasis": "um workspace.",
+    "lede": "Atribua trabalho a eles como você faria com um colega — eles pegam, atualizam o status e comentam quando terminam.",
+    "lede_web": "Desktop integra o runtime — nada para instalar. Continue na web para conectar seu próprio CLI.",
+    "download_desktop": "Baixar Desktop",
+    "continue_on_web": "Continuar na web",
+    "start_exploring": "Começar a explorar",
+    "skip_existing": "Já fiz isso antes",
+    "illustration": {
+      "card1_actor_name": "Você",
+      "card1_actor_initial": "V",
+      "card1_body_prefix": " pode preparar um post de lançamento curto? Extraia de ",
+      "card1_body_suffix": " descobertas de entrevistas.",
+      "card1_mention_content": "@Agente de Conteúdo",
+      "card1_mention_research": "@Agente de Pesquisa",
+      "card2_actor_name": "Agente de Conteúdo",
+      "card2_body": "Já vou. Puxando citações do Agente de Pesquisa, preparando em torno do ângulo \"tempo economizado\"…",
+      "card3_actor_name": "Agente de Pesquisa",
+      "card3_body": "Entrevistas de usuários desta semana resumidas — 12 ligações, 4 temas recorrentes, 3 citações principais.",
+      "card3_timestamp": "15 min atrás",
+      "card4_actor_name": "Agente de Revisão",
+      "card4_body": "Revisei o rascunho de segunda — deixei 4 notas sobre tom. De prontidão para o novo.",
+      "card5_actor_name": "Agente de Codificação",
+      "card5_body_prefix": "Enviei o recurso de exportação ",
+      "card5_body_suffix": " sinalizado. Link de visualização no PR.",
+      "card5_mention_you": "@você",
+      "card5_timestamp": "agora mesmo"
+    }
+  },
+  "common": {
+    "back": "Voltar",
+    "continue": "Continuar",
+    "skip": "Pular",
+    "cancel": "Cancelar",
+    "close": "Fechar",
+    "log_out": "Sair"
+  },
+  "source_backfill": {
+    "eyebrow": "Pergunta rápida",
+    "lede": "Ajude-nos a entender como você encontrou Multica.",
+    "submit": "Enviar",
+    "save_failed_toast": "Falha ao salvar"
+  },
+  "questions": {
+    "about_you": {
+      "question": "Conte-nos um pouco sobre você."
+    },
+    "source": {
+      "question": "Como você conheceu Multica?",
+      "friends_colleagues": "Amigos ou colegas",
+      "search": "Google / busca",
+      "social_x": "X / Twitter",
+      "social_linkedin": "LinkedIn",
+      "social_youtube": "YouTube",
+      "social_github": "GitHub",
+      "social_misc": "Outra rede social",
+      "blog_newsletter": "Blog / boletim informativo",
+      "ai_assistant": "ChatGPT / Claude / Cursor",
+      "from_work": "No trabalho",
+      "event_conference": "Conferência / encontro",
+      "dont_remember": "Não lembro",
+      "other": "Outro",
+      "other_placeholder": "ex: um podcast que ouço"
+    },
+    "role": {
+      "question": "Qual melhor descreve você?",
+      "engineer": "Engenheiro / desenvolvedor",
+      "product": "Gerente de produto",
+      "designer": "Designer",
+      "founder": "Fundador / executivo",
+      "marketing": "Marketing / growth",
+      "writer": "Escritor / conteúdo",
+      "research": "Pesquisador / analista",
+      "ops": "Operações / gestão de projetos",
+      "student": "Estudante / uso pessoal",
+      "other": "Outro",
+      "other_placeholder": "ex: professor, líder de suporte"
+    },
+    "use_case": {
+      "question": "Para que você quer usar Multica?",
+      "ship_code": "Enviar código com agentes de IA",
+      "manage_team": "Gerenciar tarefas da minha equipe",
+      "personal_tasks": "Organizar minhas próprias tarefas",
+      "plan_research": "Planejar, brainstorm, pesquisar",
+      "write_publish": "Escrever, editar, publicar",
+      "automate_ops": "Automatizar ops e fluxos de trabalho",
+      "evaluate": "Apenas explorando",
+      "other": "Outro",
+      "other_placeholder": "ex: coordenação de grupo de estudo"
+    }
+  },
+  "option_card": {
+    "other_label": "Outro",
+    "other_aria": "Descrever outra coisa"
+  },
+  "step_question": {
+    "hint_pick": "Você pode pular isso."
+  },
+  "cli_install": {
+    "copy_aria": "Copiar",
+    "intro": "Você precisará de um runtime de agente neste computador (Claude Code, Codex, Cursor, …) para executar seu agente. Também funciona em servidores e caixas de dev remotas.",
+    "step1_label": "Instale o CLI Multica",
+    "step2_label": "Inicie o daemon"
+  },
+  "cloud_waitlist": {
+    "intro_main": "Os runtimes em nuvem ainda não estão disponíveis. Deixe seu email e entraremos em contato quando estiverem.",
+    "intro_warning": "Aviso: agentes não podem iniciar execuções sem um runtime — se pular agora, nada será executado até você voltar e instalar um.",
+    "email_label": "Email",
+    "email_placeholder": "você@trabalho.com",
+    "reason_label": "Por que nuvem?",
+    "optional": "Opcional",
+    "reason_placeholder": "ex: queremos agentes rodando 24/7, ou minha equipe trabalha em diferentes dispositivos.",
+    "join": "Entrar na lista de espera",
+    "on_list": "Você está na lista",
+    "success_toast": "Você está na lista. Enviaremos um email quando os runtimes em nuvem estiverem disponíveis.",
+    "failed_toast": "Falha ao entrar na lista de espera"
+  },
+  "welcome_after_onboarding": {
+    "skip": {
+      "loading": "Configurando seu workspace…",
+      "title": "Bem-vindo ao Multica!",
+      "subtitle": "Adicionamos uma issue para ajudá-lo a conectar um runtime. Quando estiver pronto, comece com Mika em Runtimes.",
+      "got_it": "Entendi",
+      "status_in_progress": "Em andamento",
+      "error_title": "Não conseguimos configurar isso",
+      "error_body": "O guia de runtime não foi criado. Você pode tentar novamente ou conectar um runtime na página Runtimes quando quiser.",
+      "retry": "Tentar novamente",
+      "dismiss": "Agora não",
+      "cards": {
+        "install_runtime": {
+          "title": "Conectar um runtime",
+          "subtitle": "Instale Codex ou Kimi e inicie o chat guiado Mika em Runtimes."
+        }
+      }
+    }
+  },
+  "step_workspace": {
+    "eyebrow_first": "Seu primeiro workspace",
+    "eyebrow_resume": "Continuar ou começar do zero",
+    "headline_first": "Nomeie seu workspace.",
+    "headline_resume": "Continuar com {{name}}, ou começar outro.",
+    "lede_first": "Um workspace é onde suas issues, agentes e projetos vivem. Você pode convidar colegas ou criar mais workspaces depois.",
+    "lede_resume": "Retomar a configuração com o workspace que você já tem, ou criar um novo ao lado — você pode pertencer a qualquer número de workspaces.",
+    "name_label": "Nome do workspace",
+    "name_placeholder": "Acme Inc, Meu Lab, Projetos Pessoais…",
+    "random_name": "Aleatório",
+    "url_label": "URL",
+    "slug_placeholder": "acme",
+    "issue_prefix_label": "Prefixo da issue",
+    "issue_prefix_prefix": "As issues parecerão ",
+    "issue_prefix_suffix": ". Você pode mudar isso depois nas configurações.",
+    "issue_prefix_pending": "Defina a URL acima e os números das issues o seguirão — ou digite um prefixo aqui.",
+    "create_new_title": "Criar um novo workspace",
+    "hint_opening": "Abrindo {{name}}.",
+    "hint_creating": "Criando {{name}}.",
+    "hint_creating_pending": "Criando {{name}}…",
+    "hint_creating_fallback": "seu workspace",
+    "hint_name_first": "Nomeie seu workspace para criá-lo.",
+    "hint_pick": "Escolha seu workspace ou comece um novo.",
+    "cta_open": "Abrir {{name}}",
+    "cta_create_named": "Criar {{name}}",
+    "cta_create_workspace": "Criar workspace",
+    "cta_creating": "Criando…",
+    "slug_format_error": "Apenas letras minúsculas, números e hífens",
+    "slug_taken_error": "Essa URL de workspace já está em uso.",
+    "slug_reserved_error": "Essa URL de workspace é reservada e não pode ser usada.",
+    "slug_conflict_toast": "Escolha uma URL de workspace diferente",
+    "create_failed_toast": "Falha ao criar workspace",
+    "creation_disabled_eyebrow": "Criação de workspace desabilitada",
+    "creation_disabled_headline": "Peça a um administrador um convite.",
+    "creation_disabled_lede": "Esta instância Multica não permite a criação de novos workspaces. Assim que um administrador o convidar para um workspace, aceite o"
+  }
+}

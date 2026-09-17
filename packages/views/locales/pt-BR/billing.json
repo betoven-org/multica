@@ -1,0 +1,173 @@
+{
+  "title": "Faturamento (página de teste)",
+  "subtitle": "Passagem direta para /api/v1/billing/* da multica-cloud. Não é uma UI finalizada — apenas todos os endpoints em uma página para verificarmos o fluxo de proxy + Stripe.",
+  "endpoints": {
+    "balance": "GET /api/cloud-billing/balance",
+    "transactions": "GET /api/cloud-billing/transactions",
+    "batches": "GET /api/cloud-billing/batches",
+    "topups": "GET /api/cloud-billing/topups",
+    "buy": "GET /price-tiers · POST /checkout-sessions · POST /portal-sessions"
+  },
+  "balance": {
+    "title": "Saldo",
+    "credits_suffix": "créditos",
+    "meta": "raw micro: {{micro}} · proprietário: {{owner}}… · atualizado {{updated}}"
+  },
+  "buy": {
+    "title": "Comprar créditos / Gerenciar faturamento",
+    "no_tiers": "Nenhuma faixa de preço configurada. Cloud provavelmente não tem uma chave Stripe definida — checkout retornará 503.",
+    "tier_money_to_credits": "{{money}} → {{credits}} créditos",
+    "tier_bonus": " + {{credits}} bônus",
+    "tier_bonus_with_expiry": " + {{credits}} bônus ({{expiry}})",
+    "tier_id": "id: {{id}}",
+    "open_portal": "Abrir Portal de Faturamento Stripe",
+    "portal_hint": "400 é esperado para usuários que nunca pagaram (nenhum registro de cliente Stripe existe).",
+    "toast_no_url": "Cloud não retornou uma URL de checkout",
+    "toast_checkout_failed": "Checkout falhou",
+    "toast_no_portal_url": "Nenhuma URL de portal retornada",
+    "toast_portal_failed": "Portal falhou"
+  },
+  "checkout": {
+    "session_label": "Sessão de checkout {{prefix}}…",
+    "loading": "Carregando status do pedido…",
+    "fetch_failed": "Falha ao buscar status: {{error}}",
+    "fetch_failed_unknown": "erro desconhecido",
+    "final_status": "Status final: {{status}}",
+    "polling_status": "Consultando status… atual: {{status}}",
+    "status_unknown": "desconhecido",
+    "label_order": "Pedido",
+    "label_tier": "Faixa",
+    "label_charged": "Cobrado",
+    "charged_value": "{{money}} · {{credits}} créditos",
+    "charged_with_bonus": "{{money}} · {{credits}} créditos + {{bonus}} bônus",
+    "clear_url": "Limpar da URL"
+  },
+  "transactions": {
+    "title": "Transações",
+    "empty": "Nenhuma transação ainda.",
+    "credits_value": "{{value}} créditos",
+    "row_meta": "{{date}} · saldo depois: {{balance}} créditos · ref: {{ref}}",
+    "ref_empty": "—"
+  },
+  "batches": {
+    "title": "Lotes de créditos",
+    "empty": "Nenhum lote ainda.",
+    "remaining_over_total": "{{remaining}} / {{total}} créditos",
+    "id_suffix": "{{id}}…",
+    "consumed": "Consumido: {{value}} créditos",
+    "expires_suffix": " · expira {{value}}",
+    "never_expires_suffix": " · nunca expira"
+  },
+  "topups": {
+    "title": "Pedidos de recarga",
+    "empty": "Nenhum pedido de recarga ainda.",
+    "amount_to_credits": "{{money}} → {{credits}} créditos",
+    "amount_to_credits_with_bonus": "{{money}} → {{credits}} créditos + {{bonus}} bônus",
+    "row_meta": "{{date}} · stripe: {{checkout}}",
+    "stripe_empty": "—"
+  },
+  "workspace": {
+    "title": "Faturamento",
+    "description": "Gerencie o plano, limites, assentos humanos e faturamento Stripe do workspace.",
+    "loading": "Carregando faturamento do workspace",
+    "plan": {
+      "free": "Gratuito",
+      "pro": "Pro",
+      "unknown": "Plano desconhecido"
+    },
+    "status": {
+      "inactive": "Inativo",
+      "active": "Ativo",
+      "trialing": "Em teste",
+      "past_due": "Vencido",
+      "canceled": "Cancelado",
+      "incomplete": "Incompleto",
+      "incomplete_expired": "Configuração expirada",
+      "paused": "Pausado",
+      "unpaid": "Não pago",
+      "unknown": "Status desconhecido"
+    },
+    "load_failed": {
+      "title": "Faturamento está temporariamente indisponível",
+      "description": "Não foi possível carregar os detalhes da assinatura. Tente novamente."
+    },
+    "actions": {
+      "retry": "Tentar novamente",
+      "retry_autopilots": "Tentar novamente o uso de automação",
+      "upgrade": "Fazer upgrade para Pro",
+      "manage": "Gerenciar faturamento",
+      "add_seats": "Adicionar assentos",
+      "cancel": "Cancelar",
+      "continue_to_stripe": "Continuar para Stripe"
+    },
+    "errors": {
+      "action_title": "Ação de faturamento falhou",
+      "temporarily_unavailable": "Faturamento está temporariamente indisponível. Tente novamente em um momento.",
+      "not_enabled": "Assinaturas de workspace não estão habilitadas para esta implantação. Contacte seu administrador.",
+      "permission_changed": "Sua função no workspace não permite mais esta ação. Atualize a página para ver seu acesso atual.",
+      "checkout_response": "Checkout não pôde ser aberto porque a resposta do servidor era ilegível. Tente novamente sem alterar o intervalo selecionado.",
+      "already_subscribed": "Este workspace já tem uma assinatura. O plano atual foi atualizado.",
+      "checkout_failed": "Checkout não pôde ser criado. Tente novamente em um momento.",
+      "portal_response": "O Portal de Faturamento não pôde ser aberto porque a resposta do servidor era ilegível.",
+      "portal_unavailable": "O Portal de Faturamento não está disponível para este workspace. O plano atual foi atualizado.",
+      "portal_failed": "O Portal de Faturamento não pôde ser aberto. Tente novamente em um momento."
+    },
+    "return": {
+      "cancel_title": "Checkout cancelado",
+      "cancel_description": "Nenhuma mudança de plano foi feita.",
+      "portal_title": "Detalhes de faturamento atualizados",
+      "syncing_title": "Ativando sua assinatura",
+      "syncing_description": "O pagamento foi concluído. Estamos aguardando a confirmação do Stripe da mudança de plano.",
+      "timeout_description": "O pagamento foi recebido, mas a assinatura ainda está sincronizando. Atualize esta página em um momento.",
+      "active_title": "Pro está ativo",
+      "active_description": "Este workspace agora tem acesso Pro."
+    },
+    "past_due": {
+      "title": "O pagamento precisa de atenção",
+      "description": "Atualize seu método de pagamento no gerenciamento de faturamento.",
+      "grace_description": "Atualize seu método de pagamento até {{date}} para manter o acesso Pro."
+    },
+    "subscription_notice": {
+      "canceling_title": "Cancelamento está agendado",
+      "canceling_description": "Sua assinatura será cancelada em {{date}}.",
+      "canceling_description_without_date": "Esta assinatura está agendada para cancelar no final do período atual.",
+      "incomplete_title": "Configuração de assinatura está incompleta",
+      "incomplete_description": "Abra o gerenciamento de faturamento para concluir ou revisar a configuração de pagamento.",
+      "incomplete_expired_title": "Configuração de assinatura expirou",
+      "incomplete_expired_description": "A configuração de pagamento anterior expirou sem ativar Pro. Comece uma nova atualização quando estiver pronto.",
+      "paused_title": "Assinatura está pausada",
+      "paused_description": "Abra o gerenciamento de faturamento para revisar a pausa e as opções de recuperação disponíveis.",
+      "unpaid_title": "Assinatura não está paga",
+      "unpaid_description": "Abra o gerenciamento de faturamento para resolver o saldo não pago.",
+      "canceled_title": "Assinatura está cancelada"
+    },
+    "current": {
+      "title": "Plano atual",
+      "plan": "Plano do workspace",
+      "members": "Membros humanos",
+      "members_description": "Agentes e convites pendentes não são contados como assentos.",
+      "member_count_one": "{{count}} membro",
+      "member_count_other": "{{count}} membros",
+      "billing_interval": "Intervalo de faturamento",
+      "period_end": "Período atual termina"
+    },
+    "upgrade": {
+      "title": "Fazer upgrade para Pro",
+      "description": "Escolha um intervalo de faturamento e confirme os assentos atuais e o valor final no Stripe Checkout.",
+      "interval_label": "Intervalo de faturamento",
+      "monthly": "Mensal",
+      "yearly": "Anual",
+      "pro_for_team_one": "Pro para {{count}} assento humano",
+      "pro_for_team_other": "Pro para {{count}} assentos humanos",
+      "price_loading": "Carregando preços de assinatura",
+      "unit_price": "{{price}} por assento humano",
+      "price_at_checkout": "O servidor reconta membros humanos antes da compra. Stripe Checkout mostra o preço por assento autoritário e o total antes de você pagar."
+    },
+    "management": {
+      "title": "Gerenciamento de assinatura",
+      "description": "Métodos de pagamento, faturas e cancelamento.",
+      "portal": "Portal de Faturamento Stripe",
+      "portal_unavailable": "Nenhum Stripe Billing"
+    }
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "issue_statuses": {
+    "title": "Estatuses de Issue",
+    "loading": "Carregando estatuses…",
+    "add": "Adicionar status",
+    "show_archived": "Mostrar arquivados ({{count}})",
+    "archived_badge": "Arquivado",
+    "archived_hint": "Retirado de novas atribuições. Issues já nele mantêm o status.",
+    "reorder_failed": "Não foi possível salvar a nova ordem.",
+    "actions": {
+      "move_up": "Mover para cima",
+      "move_down": "Mover para baixo",
+      "open": "Ações para {{name}}",
+      "edit": "Editar",
+      "archive": "Arquivar",
+      "reorder": "Reordenar {{name}}"
+    },
+    "reorder_hint": "Arraste dentro de uma categoria para reordenar quadros, listas e menus.",
+    "built_in_dialog": {
+      "title": "Status incorporado não pode ser alterado",
+      "description": "Estatuses incorporados são usados pelo Multica e não podem ser editados ou arquivados. Você ainda pode alterar sua ordem dentro da categoria.",
+      "confirm": "Entendi"
+    },
+    "editor": {
+      "create_title": "Novo status",
+      "edit_title": "Editar status",
+      "name": "Nome",
+      "name_placeholder": "ex. Code Review",
+      "key_hint": "Referido como {{key}} pela API e CLI.",
+      "created": "Status criado. A API e CLI o referem como {{key}}.",
+      "category": "Categoria",
+      "category_locked": "Categoria não pode ser alterada após o status ser criado.",
+      "description": "Descrição",
+      "description_placeholder": "O que este status significa para seu time",
+      "color": "Cor",
+      "icon": "Forma de ícone",
+      "icon_shapes": {
+        "default": "Padrão",
+        "dotted": "Círculo pontilhado",
+        "circle": "Círculo",
+        "half": "Círculo meio preenchido",
+        "three_quarters": "Círculo três quartos preenchido",
+        "check": "Verificação",
+        "slash": "Barra",
+        "cross": "X"
+      },
+      "cancel": "Cancelar",
+      "save": "Salvar",
+      "saving": "Salvando…",
+      "save_failed": "Não foi possível salvar o status."
+    },
+    "archive_dialog": {
+      "retry": "Tentar arquivar novamente",
+      "title": "Arquivar este status?",
+      "description": "Mova todos os issues para fora de \"{{name}}\" antes de arquivá-lo. Uma vez vazio, será removido de quadros e seletores de status.",
+      "in_use_title": "Mova os issues antes de arquivar",
+      "in_use": "Issues ainda usando este status: {{count}}. Mova-os para outro status, incluindo issues concluídas e canceladas, depois tente novamente.",
+      "view_issues": "Ver issues",
+      "archiving": "Arquivando...",
+      "cancel": "Cancelar",
+      "confirm": "Arquivar",
+      "failed": "Não foi possível arquivar o status."
+    },
+    "category_labels": {
+      "unstarted": "Não iniciado",
+      "started": "Iniciado",
+      "done": "Concluído",
+      "closed": "Fechado"
+    },
+    "categories": {
+      "unstarted": "Trabalho que não foi iniciado, seja planejado ou no backlog.",
+      "started": "Trabalho que está ativo, em revisão ou bloqueado.",
+      "done": "Trabalho que foi concluído.",
+      "closed": "Trabalho que não será concluído."
+    },
+    "built_in_descriptions": {
+      "backlog": "Estacionado. Atribuir um issue aqui nunca inicia uma execução de agente.",
+      "todo": "Enfileirado. Mover um issue aqui inicia o agente atribuído.",
+      "in_progress": "Sendo trabalhado ativamente.",
+      "in_review": "Entregue, aguardando revisão humana. Finaliza a execução do autopilot.",
+      "blocked": "Parado em uma dependência externa.",
+      "done": "Concluído.",
+      "cancelled": "Decidiu-se não fazer."
+    }
+  },
+  "quick_actions": {
+    "title": "Ações Rápidas",
+    "description": "Execute um agente predefinido e prompt da barra lateral de um issue.",
+    "add": "Nova ação rápida",
+    "search_placeholder": "Procurar ações rápidas",
+    "loading": "Carregando ações rápidas…",
+    "no_results": "Nenhuma ação rápida corresponde à sua pesquisa",
+    "actions_open": "Abrir ações para {{name}}",
+    "columns": {
+      "name": "Nome",
+      "target": "Executa como",
+      "visibility": "Quem",
+      "usage": "Usado",
+      "updated": "Atualizado"
+    },
+    "empty_title": "Nenhuma ação rápida ainda",
+    "empty_hint": "Por exemplo, revisão de código ou escrita de testes.",
+    "archived": "Arquivado",
+    "visibility_public": "Time",
+    "visibility_private": "Só eu",
+    "visibility_public_hint": "Todos no workspace",
+    "visibility_private_hint": "Apenas você",
+    "field_visibility": "Quem pode usar",
+    "public_target_hint": "Deve ser um agente que todos podem disparar.",
+    "target_private": "privado",
+    "target_missing": "Alvo indisponível",
+    "archive": "Arquivar",
+    "unarchive": "Restaurar",
+    "edit": "Editar",
+    "delete": "Deletar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "never_used": "Nunca usado",
+    "used_count": "Usado {{count}}×",
+    "create_title": "Nova ação rápida",
+    "edit_title": "Editar ação rápida",
+    "dialog_description": "Executa como um comentário no issue, como uma @menção.",
+    "field_name": "Nome",
+    "field_name_placeholder": "Code Review",
+    "field_target": "Executa como",
+    "field_prompt": "Prompt",
+    "field_prompt_placeholder": "Revise o código vinculado a este issue. Foque em correção e casos extremos.",
+    "prompt_hint": "Enviado como escrito. O agente já vê o issue.",
+    "template_not_supported": "Variáveis não são suportadas ainda — remova {{token}}. O agente já lê este issue.",
+    "delete_title": "Deletar esta ação rápida?",
+    "delete_description": "Desaparece de cada barra lateral de issue. Execuções passadas permanecem no log de execução. Arquive em vez disso se você puder querer de volta."
+  },
+  "auto_save": {
+    "saving": "Salvando…",
+    "saved": "Salvo",
+    "failed": "Não foi possível salvar",
+    "toast_saved": "Alterações salvas"
+  },
+  "preferences": {
+    "general_title": "Geral",
+    "theme": {
+      "title": "Tema",
+      "light": "Claro",
+      "dark": "Escuro",
+      "system": "Sistema"
+    },
+    "language": {
+      "title": "Idioma",
+      "english": "English",
+      "chinese": "中文",
+      "korean": "한국어",
+      "japanese": "日本語",
+      "french": "Français",
+      "sync_failed": "Idioma salvo neste dispositivo, mas falhou na sincronização com sua conta. Outros dispositivos podem mostrar o idioma anterior."
+    },
+    "timezone": {
+      "title": "Fuso Horário de Visualização",
+      "browser_suffix": " (navegador)",
+      "hint": "Usado para datas e gráficos em todos os seus workspaces.",
+      "sync_failed": "Falha ao salvar sua preferência de fuso horário."
+    },
+    "sticky_comment_bar": {
+      "title": "Fixar barra de comentário na parte inferior"
+    },
+    "issue_title": "Criação de issue",
+    "comments_title": "Comentários",
+    "device_hint": "Salvo neste dispositivo.",
+    "issue_scope": "Estas preferências se aplicam a este workspace neste dispositivo. Elas apenas alteram quais campos você vê ao criar um issue."
+  },
+  "shortcuts": {
+    "title": "Atalhos de Teclado",
+    "description": "Clique em um atalho, depois pressione uma nova combinação. Salvo neste dispositivo.",
+    "search_placeholder": "Procurar ações...",
+    "reset_all": "Restaurar padrões",
+    "reset_confirm": {
+      "title": "Restaurar todos os padrões de atalho?",
+      "description": "Isso removerá cada atalho personalizado e restaurará os padrões neste dispositivo.",
+      "cancel": "Cancelar",
+      "confirm": "Restaurar todos os padrões"
+    },
+    "reset": "Restaurar",
+    "disable": "Desabilitar",
+    "reset_action": "Restaurar {{action}}",
+    "disable_action": "Desabilitar atalho {{action}}",
+    "record_aria": "Alterar atalho para {{action}}",
+    "recording": "Pressione as teclas",
+    "record_hint": "Esc cancela · Delete limpa",
+    "unassigned": "Não atribuído",
+    "no_results": "Nenhuma ação de atalho correspondente.",
+    "conflict_error": "Já usado por {{action}}.",
+    "reserved_error": "Reservado pelo navegador ou janela do desktop.",
+    "send_error": "Envio só pode usar Enter ou Mod+Enter.",
+    "unsafe_error": "Esta tecla interferiria com digitação ou navegação básica do teclado.",
+    "send_enter_hint": "Shift+Enter insere um parágrafo, continua uma lista ou adiciona uma nova linha de bloco de código.",
+    "categories": {
+      "general": "Geral",
+      "navigation": "Navegação"
+    },
+    "actions": {
+      "openSearch": {
+        "label": "Abrir pesquisa",
+        "description": "Pesquisar conteúdo ou executar comandos."
+      }
+    }
+  }
+}

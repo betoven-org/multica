@@ -1,0 +1,10 @@
+{
+  "remove_label": "Remover label {{name}}",
+  "resource_picker": {
+    "empty": "Sem labels",
+    "add": "Adicionar labels",
+    "search": "Buscar labels...",
+    "no_labels": "Crie labels nas Configurações primeiro",
+    "no_results": "Nenhum label correspondente"
+  }
+}

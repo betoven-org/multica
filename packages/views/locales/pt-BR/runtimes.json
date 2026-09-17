@@ -1,0 +1,175 @@
+{
+  "page": {
+    "title": "Runtimes",
+    "tagline": "Máquinas e workers na nuvem executando sessões CLI para seus agentes.",
+    "learn_more": "Saiba mais →",
+    "connect_remote": "Adicionar computador",
+    "search_placeholder": "Pesquisar runtimes…",
+    "scope_mine": "Meus",
+    "scope_all": "Todos",
+    "live": "Ao vivo",
+    "live_tooltip": "Atualizações em tempo real · detecção offline até 75s",
+    "filter_all": "Todos",
+    "filter_all_description": "Todos os runtimes nesta visualização",
+    "empty": {
+      "title": "Nenhum runtime ainda",
+      "hint": "Desktop detecta este computador automaticamente. Conecte outros computadores aqui."
+    },
+    "no_matches": {
+      "title": "Nenhuma correspondência",
+      "with_query": "Nenhum runtime corresponde a \"{{query}}\"{{filterSuffix}}.",
+      "with_query_filter_suffix": " neste filtro",
+      "no_query": "Nenhum runtime corresponde a este filtro.",
+      "try_widening": " Tente ampliar o escopo ou limpar os filtros."
+    },
+    "bootstrapping": {
+      "title": "Iniciando runtime local…",
+      "hint": "Conectando ao workspace..."
+    }
+  },
+  "mika_setup": {
+    "title": "Seu runtime está pronto. Comece com Mika.",
+    "description": "Deixe Mika organizar o trabalho e coordenar agentes.",
+    "action": "Começar com Mika",
+    "failed": "Não foi possível iniciar Mika",
+    "dialog_title": "Onde Mika deve executar?",
+    "cancel": "Cancelar"
+  },
+  "machine": {
+    "search_placeholder": "Pesquisar máquinas…",
+    "filters": {
+      "all": "Todos",
+      "online": "Online",
+      "issues": "Problemas"
+    },
+    "section_local": "Local",
+    "section_remote": "Remoto",
+    "section_cloud": "Nuvem",
+    "this_machine": "Este dispositivo",
+    "local_badge": "Local · este computador",
+    "pending_custom_runtimes": "Runtimes personalizados pendentes",
+    "runtime_count_one": "{{count}} runtime",
+    "runtime_count_other": "{{count}} runtimes",
+    "busy_count_one": "{{count}} ocupado",
+    "busy_count_other": "{{count}} ocupados",
+    "no_matches_title": "Nenhuma máquina",
+    "no_matches_hint": "Nenhuma máquina corresponde à pesquisa ou filtro atual.",
+    "select_machine": "Selecione uma máquina para inspecionar seus runtimes.",
+    "select_runtime": "Runtimes integrados aparecem automaticamente. Selecione um para configurações ou adicione um comando personalizado.",
+    "no_runtimes_title": "Nenhum runtime registrado",
+    "no_runtimes_hint": "Inicie ou reconecte o daemon desta máquina. Seus runtimes CLI instalados aparecerão aqui automaticamente.",
+    "not_found_title": "Máquina não encontrada",
+    "not_found_hint": "Pode estar offline, removida ou não estar mais disponível para você.",
+    "metrics": {
+      "runtimes": "Runtimes",
+      "runtimes_hint_one": "{{count}} online",
+      "runtimes_hint_other": "{{count}} online",
+      "health": "Saúde",
+      "health_clear": "Sem problemas",
+      "health_issues_one": "{{count}} problema",
+      "health_issues_other": "{{count}} problemas",
+      "workload": "Carga de trabalho",
+      "workload_value_idle": "Ocioso",
+      "workload_idle": "Todos ociosos",
+      "workload_hint": "{{running}} em execução · {{queued}} na fila",
+      "cli": "CLI",
+      "cloud_worker": "Worker na nuvem",
+      "local_daemon": "Daemon local"
+    },
+    "rename": "Renomear máquina",
+    "rename_dialog": {
+      "title": "Renomear máquina",
+      "description": "Usado para este computador e todos os seus runtimes.",
+      "placeholder": "ex: MacBook do Bohan",
+      "hint": "Deixe em branco para usar o nome padrão do dispositivo.",
+      "cancel": "Cancelar",
+      "save": "Salvar",
+      "saving": "Salvando...",
+      "toast_saved": "Máquina renomeada",
+      "toast_cleared": "Nome da máquina limpo",
+      "toast_failed": "Falha ao renomear máquina"
+    }
+  },
+  "health": {
+    "online": {
+      "label": "Online",
+      "description": "Heartbeat recebido nos últimos 45s. Pronto para enviar execuções."
+    },
+    "recently_lost": {
+      "label": "Perdido recentemente",
+      "description": "Perda de contato há menos de 5 minutos — geralmente uma falha de rede breve."
+    },
+    "offline": {
+      "label": "Offline",
+      "description": "Sem heartbeat por 5+ minutos. Reinicie o daemon ou investigue o host."
+    },
+    "long_offline": {
+      "label": "Offline prolongado",
+      "description": "Sem heartbeat por 6+ dias. Se este host ficar offline, reassine seus agentes para outro runtime ou delete este runtime."
+    }
+  },
+  "detail": {
+    "all_runtimes": "Todos os runtimes",
+    "read_only": "Somente leitura",
+    "delete_button": "Deletar runtime",
+    "last_seen": "visto pela última vez {{when}}",
+    "never_seen": "nunca conectado",
+    "fact_owner": "Proprietário",
+    "fact_device": "Dispositivo",
+    "fact_runtime": "Runtime",
+    "technical_details": "Detalhes técnicos",
+    "fact_daemon_cli": "CLI do Daemon",
+    "fact_daemon_id": "ID do Daemon",
+    "serving_title": "Servindo",
+    "serving_count_one": "{{count}} agente",
+    "serving_count_other": "{{count}} agentes",
+    "no_agents": "Nenhum agente está vinculado a este runtime ainda.",
+    "diagnostics_title": "Diagnósticos",
+    "diagnostics_cli": "CLI",
+    "diagnostics_visibility": "Visibilidade",
+    "visibility_label": {
+      "private": "Privado",
+      "public": "Público"
+    },
+    "visibility_hint": {
+      "private": "Apenas você pode criar agentes neste runtime.",
+      "public": "Qualquer membro do workspace pode criar agentes neste runtime."
+    },
+    "visibility_hint_readonly": {
+      "private": "Apenas o proprietário do runtime pode criar agentes neste runtime, e somente ele pode alternar para Público.",
+      "public": "Qualquer membro do workspace pode criar agentes neste runtime. Apenas o proprietário do runtime pode alternar de volta para Privado."
+    },
+    "visibility_toast_updated": "Visibilidade definida como {{visibility}}",
+    "visibility_toast_failed": "Falha ao atualizar visibilidade",
+    "delete_dialog": {
+      "self_heal_notice": "Este runtime é gerenciado por um daemon local em execução. Deletá-lo terá sucesso, mas o daemon se re-registrará com um novo runtime em segundos — interrompa o processo daemon primeiro para removê-lo permanentemente.",
+      "profile_backed_notice": "Este runtime foi registrado de um perfil de runtime personalizado. Deletá-lo remove apenas a instância de runtime atual; um daemon em execução pode registrá-lo novamente enquanto o perfil permanece. Delete o perfil de runtime personalizado de Runtimes personalizados para removê-lo permanentemente.",
+      "light": {
+        "title": "Deletar Runtime?",
+        "description": "Tem certeza de que deseja deletar \"{{name}}\"? Esta ação não pode ser desfeita.",
+        "cancel": "Cancelar",
+        "confirm": "Deletar runtime",
+        "submitting": "Deletando..."
+      },
+      "cascade": {
+        "title_one": "Desvincular {{count}} agente e deletar este Runtime?",
+        "title_other": "Desvincular {{count}} agentes e deletar este Runtime?",
+        "description": "Deletar \"{{name}}\". Os agentes abaixo são mantidos — suas instruções, chats e histórico de execuções permanecem intactos — mas serão desvinculados e não poderão executar até que você os vincule a outro runtime. Suas execuções na fila ou em andamento serão canceladas e o Runtime será deletado.",
+        "warning": "Execuções na fila e em andamento serão canceladas, e estes agentes não poderão receber novo trabalho até que sejam vinculados a um runtime.",
+        "notice_runtime_has_active_agents": "Agentes ativos foram adicionados desde que você abriu este diálogo. Revise o novo plano e confirme.",
+        "notice_runtime_delete_plan_changed": "O conjunto de agentes ativos mudou enquanto este diálogo estava aberto. Revise o novo plano e confirme.",
+        "checkbox_one": "Entendo que este {{count}} agente será desvinculado e não poderá executar até que eu o vincule a um runtime, e que qualquer execução na fila ou em andamento será cancelada.",
+        "checkbox_other": "Entendo que estes {{count}} agentes serão desvinculados e não poderão executar até que eu os vincule a um runtime, e que qualquer execução na fila ou em andamento será cancelada.",
+        "cancel": "Cancelar",
+        "confirm_one": "Desvincular {{count}} agente e deletar runtime",
+        "confirm_other": "Desvincular {{count}} agentes e deletar runtime",
+        "submitting": "Desvinculando e deletando...",
+        "delete_failed_toast": "Falha ao deletar runtime",
+        "table": {
+          "header_agent": "Agente",
+          "header_owner": "Proprietário"
+        }
+      }
+    }
+  }
+}

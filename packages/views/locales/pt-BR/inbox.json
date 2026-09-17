@@ -1,0 +1,120 @@
+{
+  "page": {
+    "title": "Caixa de Entrada",
+    "back": "Caixa de Entrada"
+  },
+  "menu": {
+    "mark_all_read": "Marcar tudo como lido",
+    "archive_all": "Arquivar tudo",
+    "archive_all_read": "Arquivar lidos",
+    "archive_completed": "Arquivar concluídos"
+  },
+  "filters": {
+    "tooltip": "Filtrar caixa de entrada",
+    "active_count_one": "{{count}} filtro ativo",
+    "active_count_other": "{{count}} filtros ativos",
+    "status": "Status",
+    "priority": "Prioridade",
+    "from": "De",
+    "unread_only": "Apenas não lidos",
+    "notification_count_one": "{{count}} notificação",
+    "notification_count_other": "{{count}} notificações",
+    "clear": "Limpar filtros",
+    "empty": "Nenhuma notificação corresponde aos seus filtros"
+  },
+  "context_menu": {
+    "mark_read": "Marcar como lido",
+    "mark_unread": "Marcar como não lido",
+    "archive": "Arquivar",
+    "unarchive": "Restaurar do arquivo",
+    "open_in_new_tab": "Abrir em nova aba"
+  },
+  "list": {
+    "loading_selection": "Carregando notificação…",
+    "empty": "Nenhuma notificação",
+    "mark_done_tooltip": "Marcar como concluído",
+    "archive_tooltip": "Arquivar",
+    "time": {
+      "just_now": "agora mesmo",
+      "minutes": "{{count}}m",
+      "hours": "{{count}}h",
+      "days": "{{count}}d"
+    },
+    "archived_title": "Arquivado",
+    "archived_empty": "Nenhuma notificação arquivada",
+    "unarchive_tooltip": "Restaurar do arquivo",
+    "actions_aria": "Ações de notificação",
+    "load_more": "Carregar mais",
+    "loading_more": "Carregando…",
+    "retry": "Tentar novamente"
+  },
+  "detail": {
+    "select_prompt": "Selecione uma notificação para ver os detalhes",
+    "empty": "Sua caixa de entrada está vazia",
+    "original_input": "Entrada original",
+    "retry_with_context": "Tentar novamente com contexto",
+    "edit_advanced": "Editar como formulário avançado",
+    "autopilot_quota_exceeded_body": "Este workspace atingiu seu limite de {{limit}} execuções do autopilot para o período atual. Novas execuções não serão iniciadas até a cota ser reabastecida {{resetAt}}.",
+    "autopilot_quota_upgrade": "Ver opções de atualização",
+    "archive": "Arquivar",
+    "unarchive": "Restaurar do arquivo"
+  },
+  "types": {
+    "issue_assigned": "Atribuído",
+    "issue_subscribed": "Inscrito",
+    "unassigned": "Não atribuído",
+    "assignee_changed": "Responsável alterado",
+    "status_changed": "Status alterado",
+    "priority_changed": "Prioridade alterada",
+    "start_date_changed": "Data de início alterada",
+    "due_date_changed": "Data de vencimento alterada",
+    "new_comment": "Novo comentário",
+    "mentioned": "Mencionado",
+    "review_requested": "Revisão solicitada",
+    "task_completed": "Execução concluída",
+    "task_failed": "Execução falhou",
+    "agent_blocked": "Agente bloqueado",
+    "agent_completed": "Agente concluído",
+    "reaction_added": "Reagido",
+    "quick_create_done": "Criado com agente",
+    "quick_create_failed": "Falha ao criar com agente",
+    "quick_create_unconfirmed": "Criação com agente não confirmada",
+    "autopilot_paused": "Autopilot pausado",
+    "autopilot_quota_exceeded": "Limite de execuções do autopilot atingido"
+  },
+  "labels": {
+    "set_status_to": "Definir status para",
+    "set_priority_to": "Definir prioridade para",
+    "assigned_to": "Atribuído a {{name}}",
+    "removed_assignee": "Responsável removido",
+    "set_start_date_to": "Definir data de início para {{date}}",
+    "removed_start_date": "Data de início removida",
+    "set_due_date_to": "Definir data de vencimento para {{date}}",
+    "removed_due_date": "Data de vencimento removida",
+    "reacted_to_comment": "Reagiu {{emoji}} ao seu comentário",
+    "created_with_agent": "Criado com agente: {{identifier}}",
+    "failed_with_detail": "Falha: {{detail}}",
+    "autopilot_quota_blocked": "Execução bloqueada porque o limite foi atingido"
+  },
+  "toasts": {
+    "source_context_retry_started": "Tentativa iniciada com o contexto original",
+    "archived": "Notificação arquivada",
+    "unarchived": "Notificação restaurada"
+  },
+  "errors": {
+    "archived_lookup_failed": "Falha ao carregar a notificação vinculada",
+    "source_context_retry_failed": "Não foi possível tentar novamente com o contexto original",
+    "source_context_retry_unavailable": "Este contexto não pode mais ser repetido. Comece novamente a partir do ponto de ramificação.",
+    "mark_read_failed": "Falha ao marcar como lido",
+    "mark_unread_failed": "Falha ao marcar como não lido",
+    "archive_failed": "Falha ao arquivar",
+    "mark_done_failed": "Falha ao marcar como concluído",
+    "mark_all_read_failed": "Falha ao marcar tudo como lido",
+    "archive_all_failed": "Falha ao arquivar tudo",
+    "archive_all_read_failed": "Falha ao arquivar itens lidos",
+    "archive_completed_failed": "Falha ao arquivar concluídos",
+    "unarchive_failed": "Falha ao restaurar do arquivo",
+    "archived_load_failed": "Falha ao carregar notificações arquivadas",
+    "filters_load_failed": "Não foi possível carregar os filtros"
+  }
+}

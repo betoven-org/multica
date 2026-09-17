@@ -1,0 +1,129 @@
+{
+  "bubble_menu": {
+    "bold": "Negrito",
+    "italic": "Itálico",
+    "strikethrough": "Riscado",
+    "code": "Código",
+    "highlight": "Destacar",
+    "link": "Link",
+    "list": "Lista",
+    "task_list": "Lista de tarefas",
+    "quote": "Citação",
+    "url_aria_label": "URL",
+    "link_edit": {
+      "apply": "Aplicar link",
+      "remove": "Remover link",
+      "close": "Fechar editor de link"
+    },
+    "heading_dropdown": {
+      "text": "Texto",
+      "normal_text": "Texto normal",
+      "heading_1": "Título 1",
+      "heading_2": "Título 2",
+      "heading_3": "Título 3"
+    },
+    "list_dropdown": {
+      "bullet_list": "Lista com marcadores",
+      "ordered_list": "Lista numerada",
+      "task_list": "Lista de tarefas"
+    },
+    "sub_issue": {
+      "tooltip": "Criar sub-issue a partir da seleção",
+      "created": "{{identifier}} criada",
+      "create_failed": "Falha ao criar sub-issue"
+    }
+  },
+  "image": {
+    "view": "Visualizar imagem",
+    "download": "Download",
+    "copy_link": "Copiar link",
+    "delete": "Deletar",
+    "link_copied": "Link copiado",
+    "copy_link_failed": "Falha ao copiar link",
+    "canvas_label": "Canvas da imagem. Arraste para mover, role para aumentar/diminuir zoom, clique duplo para alternar tamanho real.",
+    "previous": "Imagem anterior",
+    "next": "Próxima imagem",
+    "sequence_position": "{{index}} / {{total}}",
+    "unavailable": "Essa imagem não está mais disponível — foi pulada."
+  },
+  "canvas": {
+    "zoom_in": "Aumentar zoom",
+    "zoom_out": "Diminuir zoom",
+    "zoom_fit": "Ajustar à visualização",
+    "zoom_actual": "Tamanho real"
+  },
+  "attachment": {
+    "download_failed": "Não foi possível obter um link de download. Tente novamente em um momento.",
+    "preview": "Visualizar",
+    "preview_loading": "Carregando visualização…",
+    "preview_failed": "Não foi possível carregar a visualização",
+    "preview_too_large": "O arquivo é muito grande para visualizar. Faça o download.",
+    "preview_unsupported": "Este tipo de arquivo não pode ser visualizado.",
+    "close": "Fechar",
+    "open_in_new_tab": "Abrir em nova aba",
+    "remove": "Remover anexo"
+  },
+  "link_hover": {
+    "copy_link": "Copiar link",
+    "open_link": "Abrir link",
+    "link_copied": "Link copiado",
+    "copy_failed": "Falha ao copiar"
+  },
+  "mention": {
+    "group_users": "Usuários",
+    "group_issues": "Issues",
+    "all_members": "Todos os membros",
+    "agent_badge": "Agente",
+    "squad_badge": "Squad",
+    "searching": "Pesquisando...",
+    "no_results": "Nenhum resultado",
+    "group_current": "Página atual",
+    "group_recent": "Visualizados recentemente",
+    "group_search": "Resultados da pesquisa",
+    "group_cancelled": "Cancelado"
+  },
+  "slash_command": {
+    "no_skills_configured": "Nenhuma skill configurada",
+    "no_results": "Nenhuma skill correspondente",
+    "commands": {
+      "note": "Adicionar uma nota — não acionará nenhum agente"
+    }
+  },
+  "code_block": {
+    "html_preview": "Visualização HTML",
+    "copy_code": "Copiar código",
+    "show_preview": "Mostrar visualização",
+    "show_source": "Mostrar código-fonte",
+    "fullscreen": "Tela cheia"
+  },
+  "file_card": {
+    "uploading": "Enviando {{filename}}"
+  },
+  "upload": {
+    "failed": "Não foi possível fazer upload de {{filename}}: {{reason}}",
+    "in_progress": "Enviando…",
+    "interrupted": "Upload interrompido — o arquivo não foi salvo. Anexe-o novamente.",
+    "remove": "Remover",
+    "uploading_label": "Enviando {{filename}}…",
+    "failed_label": "Não foi possível fazer upload de {{filename}}"
+  },
+  "title_editor": {
+    "title_aria_label": "Título"
+  },
+  "mermaid": {
+    "diagram_label": "Diagrama Mermaid",
+    "render_error": "Não foi possível renderizar o diagrama Mermaid.",
+    "rendering": "Renderizando diagrama…",
+    "viewer_title": "Diagrama",
+    "canvas_label": "Canvas do diagrama. Arraste para mover, role para aumentar/diminuir zoom.",
+    "open_viewer": "Abrir visualizador de diagrama",
+    "close_viewer": "Fechar",
+    "copy_source": "Copiar código-fonte do diagrama",
+    "show_source": "Mostrar código-fonte",
+    "show_diagram": "Mostrar diagrama",
+    "export": "Exportar",
+    "export_png": "Download PNG",
+    "export_svg": "Download SVG",
+    "export_source": "Download .mmd"
+  }
+}

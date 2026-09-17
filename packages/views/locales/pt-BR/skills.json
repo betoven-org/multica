@@ -1,0 +1,191 @@
+{
+  "page": {
+    "title": "Skills",
+    "tagline": "Instruções que qualquer agente neste workspace pode usar.",
+    "learn_more": "Saiba mais →",
+    "new_skill": "Nova skill",
+    "search_placeholder": "Pesquisar skills…",
+    "scopes": {
+      "all": {
+        "label": "Todas",
+        "description": "Todas as skills neste workspace"
+      },
+      "used": {
+        "label": "Em uso",
+        "description": "Skills atribuídas a pelo menos um agente"
+      },
+      "unused": {
+        "label": "Não usadas",
+        "description": "Skills não atribuídas a nenhum agente"
+      },
+      "mine": {
+        "label": "Criadas por mim",
+        "description": "Skills que você criou"
+      }
+    },
+    "empty": {
+      "title": "Nenhuma skill ainda",
+      "description": "Crie ou importe uma skill."
+    },
+    "no_matches": {
+      "title": "Nenhum resultado",
+      "with_query": "Nenhuma skill corresponde a \"{{query}}\"{{filterSuffix}}.",
+      "with_query_filter_suffix": " neste filtro",
+      "filter_only": "Nenhuma skill corresponde a este filtro.",
+      "try_different": " Tente uma pesquisa diferente."
+    },
+    "intro_banner": {
+      "title": "Compartilhado com seu workspace.",
+      "body": "Qualquer pessoa pode criar uma skill, importar uma de uma URL ou pasta local, ou copiar uma de seu runtime local — e todo agente pode usá-la.",
+      "highlight": "Skills de runtime local permanecem privadas até que você copie uma aqui."
+    },
+    "list_error": {
+      "title": "Não foi possível carregar skills",
+      "fallback": "Algo deu errado ao buscar a lista de skills.",
+      "retry": "Tente novamente"
+    },
+    "supporting_data_warning": "Alguns dados do workspace falharam ao carregar. Atribuição de criador, nomes de runtime ou permissões de edição podem aparecer incompletos."
+  },
+  "table": {
+    "name": "Nome",
+    "created_by": "Adicionada por",
+    "used_by": "Usada por",
+    "source": "Fonte",
+    "updated": "Atualizada",
+    "created": "Criada",
+    "lock_tooltip": "Somente leitura — apenas o criador ou admin pode editar",
+    "unused": "— não usada",
+    "by_creator": "por {{name}}",
+    "source_manual": "Criada manualmente",
+    "source_runtime_named": "De {{name}}",
+    "source_runtime_provider": "Do runtime {{provider}}",
+    "source_runtime_unknown": "De um runtime",
+    "source_clawhub": "Do ClawHub",
+    "source_skills_sh": "Do Skills.sh",
+    "source_github": "Do GitHub"
+  },
+  "actions": {
+    "row_menu": "Ações",
+    "add_to_agent": "Adicionar a agente",
+    "refresh": "Atualizar da fonte",
+    "my_agents": "Meus agentes",
+    "other_agents": "Outros agentes",
+    "no_agents": "Nenhum agente disponível",
+    "search_placeholder": "Pesquisar agentes…",
+    "no_agents_match": "Nenhum agente corresponde à sua pesquisa.",
+    "has_partial": "{{owned}}/{{total}} adicionadas",
+    "added_toast": "Adicionada a {{name}}",
+    "add_failed_toast": "Falha ao adicionar skill",
+    "delete": "Excluir",
+    "selected": "{{count}} selecionadas",
+    "clear_selection": "Limpar seleção",
+    "delete_no_permission": "A seleção inclui skills que apenas seu criador ou um admin pode excluir",
+    "delete_dialog_title_one": "Excluir {{count}} skill?",
+    "delete_dialog_title_other": "Excluir {{count}} skills?",
+    "delete_dialog_desc_one": "Isso excluirá permanentemente a skill selecionada e a removerá de todos os agentes.",
+    "delete_dialog_desc_other": "Isso excluirá permanentemente as {{count}} skills selecionadas e as removerá de todos os agentes.",
+    "deleted_toast_one": "{{count}} skill excluída",
+    "deleted_toast_other": "{{count}} skills excluídas",
+    "delete_failed_toast": "Falha ao excluir skills",
+    "update": "Atualizar",
+    "update_none": "A seleção não tem skills importadas que você possa atualizar",
+    "update_dialog_title": "Atualizar skills da fonte?",
+    "update_summary_selected_one": "{{count}} skill será atualizada de sua fonte",
+    "update_summary_selected_other": "{{count}} skills serão atualizadas de suas fontes",
+    "update_summary_skipped_one": "{{count}} não pode ser atualizada de uma fonte — ignorada",
+    "update_summary_skipped_other": "{{count}} não podem ser atualizadas de uma fonte — ignoradas",
+    "update_confirm": "Atualizar {{count}}",
+    "update_updating": "Atualizando {{done}}/{{total}}…",
+    "updated_toast_one": "{{count}} skill atualizada da fonte",
+    "updated_toast_other": "{{count}} skills atualizadas da fonte",
+    "update_partial_toast": "Atualizadas {{count}}, {{failed}} falharam",
+    "cancel": "Cancelar",
+    "add_confirm": "Adicionar ({{num}})",
+    "adding": "Adicionando...",
+    "added_multi_toast_one": "Adicionada a {{count}} agente",
+    "added_multi_toast_other": "Adicionada a {{count}} agentes"
+  },
+  "toolbar": {
+    "result_count_title": "Skills correspondentes / todas as skills",
+    "filter_label": "Filtro",
+    "filter_active_count_one": "{{count}} filtro",
+    "filter_active_count_other": "{{count}} filtros",
+    "clear_filters": "Limpar filtros",
+    "section_usage": "Uso",
+    "section_labels": "Rótulos",
+    "filter_search_placeholder": "Filtrar...",
+    "no_labels": "Nenhum rótulo ainda",
+    "no_results": "Nenhum resultado",
+    "display": "Exibição",
+    "sort_by": "Ordenar por",
+    "direction_asc": "Crescente",
+    "direction_desc": "Decrescente",
+    "section_columns": "Colunas"
+  },
+  "detail": {
+    "all_skills": "Todas as skills",
+    "read_only": "Somente leitura",
+    "delete_aria": "Excluir skill",
+    "delete_tooltip": "Excluir skill",
+    "supporting_data_warning": "Alguns dados do workspace falharam ao carregar. Atribuição de criador, nomes de runtime ou permissões de edição podem aparecer incompletos até a próxima atualização.",
+    "delete_file": "Excluir arquivo",
+    "name_placeholder": "nome-skill",
+    "description_placeholder": "Uma frase descrevendo quando um agente deve usar esta skill…",
+    "subline": {
+      "origin_runtime_named": "Runtime local · {{name}}",
+      "origin_runtime_provider": "Runtime local · {{provider}}",
+      "origin_runtime_unknown": "Runtime local",
+      "origin_clawhub": "Importada · ClawHub",
+      "origin_skills_sh": "Importada · Skills.sh",
+      "origin_github": "Importada · GitHub",
+      "origin_workspace": "Criada manualmente"
+    },
+    "conflict_banner": {
+      "title": "Outra pessoa atualizou esta skill",
+      "body": "Suas edições foram preservadas. Descarte para puxar suas mudanças ou Salve para sobrescrever."
+    },
+    "save_bar": {
+      "changed_summary": "Alteradas: {{parts}}",
+      "changed_files_one": "{{count}} arquivo",
+      "changed_files_other": "{{count}} arquivos",
+      "discard": "Descartar",
+      "save": "Salvar alterações",
+      "saving": "Salvando…"
+    },
+    "not_found": {
+      "title": "Skill não encontrada",
+      "fallback": "Esta skill pode ter sido excluída ou você perdeu acesso.",
+      "back": "Voltar para Skills"
+    },
+    "toast_saved": "Skill salva",
+    "toast_save_failed": "Falha ao salvar skill",
+    "toast_deleted": "Skill excluída",
+    "toast_delete_failed": "Falha ao excluir skill",
+    "refresh": {
+      "button": "Atualizar",
+      "tooltip": "Baixar novamente esta skill de sua fonte",
+      "source_github": "GitHub",
+      "source_skills_sh": "Skills.sh",
+      "source_clawhub": "ClawHub",
+      "toast_success": "Skill atualizada de {{source}}",
+      "toast_failed": "Falha ao atualizar skill",
+      "dialog": {
+        "title": "Atualizar da fonte?",
+        "description": "Isso fará o download novamente de \"{{name}}\" de {{source}} e substituirá seu nome, descrição, SKILL.md e arquivos pela versão mais recente.",
+        "warning": "Edições locais nesta skill serão sobrescritas. Atribuições de agentes, rótulos e criador são preservados.",
+        "cancel": "Cancelar",
+        "confirm": "Atualizar",
+        "refreshing": "Atualizando…"
+      }
+    },
+    "delete_dialog": {
+      "title": "Excluir skill?",
+      "description_with_agents_one": "Isso excluirá permanentemente \"{{name}}\" e a removerá de {{count}} agente que está usando-a no momento.",
+      "description_with_agents_other": "Isso excluirá permanentemente \"{{name}}\" e a removerá de {{count}} agentes que estão usando-a no momento.",
+      "description_no_agents": "Isso excluirá permanentemente \"{{name}}\" e a removerá de todos os agentes.",
+      "warning": "Esta ação não pode ser desfeita.",
+      "cancel": "Cancelar",
+      "confirm": "Excluir permanentemente"
+    }
+  }
+}

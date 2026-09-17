@@ -1,0 +1,227 @@
+{
+  "page": {
+    "title": "Autopilot",
+    "new_autopilot": "Novo autopilot",
+    "start_blank": "Começar do zero",
+    "table": {
+      "name": "Nome",
+      "agent": "Agente",
+      "created_by": "Criado por",
+      "mode": "Modo",
+      "status": "Status",
+      "last_run": "Última execução",
+      "assignee": "Atribuído a",
+      "trigger": "Gatilho",
+      "next_run": "Próxima execução",
+      "created": "Criado"
+    },
+    "last_run_empty": "--",
+    "empty": {
+      "title": "Nenhum autopilot ainda",
+      "hint": "Agende trabalhos recorrentes para seus agentes de IA. Escolha um modelo ou comece do zero."
+    },
+    "scope_all": "Todos",
+    "no_matches": "Nenhuma automação corresponde",
+    "retry": "Tentar novamente"
+  },
+  "status": {
+    "active": "Ativo",
+    "paused": "Pausado",
+    "paused_runtime_required": "Pausado — o responsável precisa de um runtime",
+    "archived": "Arquivado"
+  },
+  "execution_mode": {
+    "create_issue": "Criar Issue",
+    "run_only": "Apenas Executar"
+  },
+  "relative_date": {
+    "today": "Hoje",
+    "one_day_ago": "Há 1d",
+    "days_ago": "Há {{count}}d",
+    "months_ago": "Há {{count}}mo"
+  },
+  "templates": {
+    "daily_news": {
+      "title": "Resumo de notícias diárias",
+      "summary": "Busque e resuma as notícias de hoje para o time"
+    },
+    "pr_review": {
+      "title": "Lembrete de revisão de PR",
+      "summary": "Marque pull requests desatualizados que precisam de revisão"
+    },
+    "bug_triage": {
+      "title": "Triagem de bugs",
+      "summary": "Avalie e priorize novos relatórios de bugs"
+    },
+    "weekly_progress": {
+      "title": "Relatório de progresso semanal",
+      "summary": "Compile um resumo semanal do progresso do time"
+    },
+    "dependency_audit": {
+      "title": "Auditoria de dependências",
+      "summary": "Procure por vulnerabilidades de segurança e pacotes desatualizados"
+    },
+    "documentation_check": {
+      "title": "Verificação de documentação",
+      "summary": "Revise mudanças recentes para lacunas na documentação"
+    }
+  },
+  "detail": {
+    "not_found": "Autopilot não encontrado",
+    "pause_aria": "Pausar autopilot",
+    "activate_aria": "Ativar autopilot",
+    "paused_runtime_required": "Pausado porque o responsável perdeu seu runtime. Vincule um runtime e reative este autopilot.",
+    "bind_runtime": "Vincular runtime",
+    "edit": "Editar",
+    "run_now": "Executar agora",
+    "running": "Executando...",
+    "toast_triggered": "Autopilot acionado",
+    "toast_trigger_failed": "Falha ao acionar autopilot",
+    "run_blocked_invocation_not_allowed": "Não acionado — você não tem permissão para usar o agente deste autopilot",
+    "run_blocked_runtime_offline": "Não acionado — o runtime do agente está offline",
+    "run_blocked_agent_runtime_required": "Não acionado — o agente não tem runtime; vincule um para executá-lo",
+    "run_blocked_target_unavailable": "Não acionado — o agente está indisponível",
+    "run_blocked_attribution": "Não acionado — a execução não pôde ser atribuída a um membro responsável",
+    "run_blocked_already_active": "Não acionado — uma execução recente já cobre isso",
+    "run_blocked_quota_exceeded": "Não acionado — o limite de execuções para este período foi atingido",
+    "run_blocked_issue_limit_reached": "Não acionado — o workspace atingiu seu limite de issues",
+    "run_blocked_generic": "Não acionado — a execução foi bloqueada",
+    "section_properties": "Propriedades",
+    "section_triggers": "Gatilhos",
+    "section_run_history": "Histórico de Execuções",
+    "section_danger": "Zona de Perigo",
+    "field_agent": "Agente",
+    "field_created_by": "Criado por",
+    "field_output_mode": "Modo de Saída",
+    "field_project": "Projeto",
+    "no_project": "Sem projeto",
+    "project_unavailable": "Projeto indisponível",
+    "field_prompt": "Prompt",
+    "field_subscribers": "Inscritos",
+    "field_subscribers_none": "Nenhum",
+    "add_trigger": "Adicionar gatilho",
+    "no_triggers": "Nenhum gatilho configurado. Adicione um agendamento para executar automaticamente.",
+    "no_runs": "Nenhuma execução ainda. Clique em \"Executar agora\" para acionar manualmente.",
+    "delete_button": "Deletar autopilot",
+    "toast_deleted": "Autopilot deletado",
+    "toast_delete_failed": "Falha ao deletar autopilot",
+    "delete_dialog": {
+      "title": "Deletar autopilot",
+      "description": "Isso deletará permanentemente \"{{title}}\", junto com seus gatilhos e histórico de execuções. Esta ação não pode ser desfeita.",
+      "cancel": "Cancelar",
+      "confirm": "Deletar",
+      "deleting": "Deletando..."
+    }
+  },
+  "access": {
+    "title": "Gerenciar acesso",
+    "description": "Os membros que você adicionar podem editar, executar e gerenciar os gatilhos e webhooks deste autopilot.",
+    "current_label": "Com acesso",
+    "add": "Adicionar membro",
+    "search_placeholder": "Procurar membros…",
+    "no_results": "Nenhum membro encontrado",
+    "remove_tooltip": "Remover acesso",
+    "empty": "Ninguém recebeu acesso ainda.",
+    "toast_granted": "Acesso concedido",
+    "toast_revoked": "Acesso removido",
+    "toast_failed": "Não foi possível atualizar o acesso",
+    "owner_note": "O criador e administradores do workspace sempre têm acesso."
+  },
+  "run_status": {
+    "issue_created": "Issue Criada",
+    "running": "Em Execução",
+    "skipped": "Pulada",
+    "completed": "Concluída",
+    "failed": "Falhou"
+  },
+  "run_source": {
+    "schedule": "Agendamento",
+    "manual": "Manual",
+    "webhook": "Webhook",
+    "api": "API"
+  },
+  "run": {
+    "issue_linked": "Issue vinculada",
+    "view_log": "Ver log de execução",
+    "skipped_group": {
+      "label": "Puladas",
+      "summary": "{{count}} execuções puladas"
+    }
+  },
+  "webhook_payload": {
+    "label": "Evento webhook:",
+    "unknown_event": "webhook.received",
+    "payload": "Payload",
+    "content_type": "Content-Type: {{type}}",
+    "copy": "Copiar",
+    "copied": "Payload do webhook copiado",
+    "copied_short": "Copiado",
+    "copy_failed": "Falha ao copiar",
+    "truncated_marker": "[truncado — clique em Copiar para obter o payload completo]"
+  },
+  "trigger_kind": {
+    "schedule": "Agendamento",
+    "webhook": "Webhook",
+    "api": "API"
+  },
+  "trigger_row": {
+    "disabled_badge": "Desabilitado",
+    "deprecated_badge": "Deprecated",
+    "next_label": "Próximo: {{date}}",
+    "webhook_url_label": "URL do Webhook",
+    "show_url": "Mostrar URL",
+    "hide_url": "Ocultar URL",
+    "hidden_url_aria": "URL do webhook oculta — clique para mostrar",
+    "copy_url": "Copiar URL",
+    "url_copied": "URL do webhook copiada",
+    "url_copy_failed": "Falha ao copiar",
+    "rotate_url": "Rotacionar URL",
+    "rotate_confirm_title": "Rotacionar URL do webhook",
+    "rotate_confirm_description": "A URL atual deixará de funcionar imediatamente. Qualquer sistema externo que a chame deve ser atualizado com a nova URL. Continuar?",
+    "rotate_confirm_cancel": "Cancelar",
+    "rotate_confirm_action": "Rotacionar URL",
+    "rotate_in_progress": "Rotacionando...",
+    "toast_rotated": "URL do webhook rotacionada",
+    "toast_rotate_failed": "Falha ao rotacionar URL",
+    "toast_deleted": "Gatilho deletado",
+    "toast_delete_failed": "Falha ao deletar gatilho",
+    "delete_dialog": {
+      "title": "Deletar gatilho",
+      "description": "Este gatilho será removido e o autopilot deixará de dispararatar neste agendamento. Esta ação não pode ser desfeita.",
+      "cancel": "Cancelar",
+      "confirm": "Deletar",
+      "deleting": "Deletando..."
+    }
+  },
+  "deliveries": {
+    "section_title": "Entregas de Webhook",
+    "empty": "Nenhuma entrega de webhook ainda. Envie um POST para a URL do webhook para ver entradas aqui.",
+    "row": {
+      "attempts": "{{count}}× tentativas",
+      "replay_badge": "Replay"
+    },
+    "status": {
+      "queued": "Na fila",
+      "dispatched": "Despachada",
+      "rejected": "Rejeitada",
+      "ignored": "Ignorada",
+      "failed": "Falhou"
+    },
+    "signature": {
+      "not_required": "Sem assinatura",
+      "valid": "Assinatura válida",
+      "invalid": "Assinatura inválida",
+      "missing": "Assinatura faltando"
+    },
+    "detail": {
+      "title": "Entrega",
+      "received_at": "Recebida",
+      "last_attempt_at": "Última tentativa",
+      "attempt_count": "Tentativas",
+      "dispatch_attempts": "Tentativas de despacho",
+      "available_at": "Próximo despacho",
+      "response_status": "Resposta",
+      "dedupe_key": "Chave de deduplicação"
+    }
+  }
+}

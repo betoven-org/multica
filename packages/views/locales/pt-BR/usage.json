@@ -1,0 +1,113 @@
+{
+  "title": "Análise",
+  "tab_usage": "Uso",
+  "header": {
+    "timezone_and_updated": "{{tz}} · atualizado em {{time}}",
+    "refresh": "Atualizar"
+  },
+  "filter": {
+    "project_label": "Projeto",
+    "all_projects": "Todos os projetos",
+    "period_label": "Período"
+  },
+  "kpi": {
+    "cost_label": "Custo · {{days}}D",
+    "tokens_label": "Tokens · {{days}}D",
+    "tokens_hint": "Entrada {{input}} · Saída {{output}}",
+    "run_time_label": "Tempo de execução · {{days}}D",
+    "run_time_hint": "Em {{tasks}} execuções",
+    "tasks_label": "Execuções · {{days}}D",
+    "tasks_hint": "{{failed}} falharam"
+  },
+  "dim": {
+    "label": "Dimensão",
+    "daily": "Diário",
+    "weekly": "Semanal"
+  },
+  "daily": {
+    "title_cost": "Custo diário",
+    "title_tokens": "Tokens diários",
+    "title_time": "Tempo de execução diário",
+    "title_tasks": "Execuções diárias",
+    "title_errors": "Erros diários",
+    "metric_cost": "Custo",
+    "metric_tokens": "Tokens",
+    "metric_time": "Tempo",
+    "metric_tasks": "Execuções",
+    "no_data": "Nenhum uso nesta janela.",
+    "metric_label": "Métrica"
+  },
+  "weekly": {
+    "title_cost": "Custo semanal",
+    "title_tokens": "Tokens semanais",
+    "title_time": "Tempo de execução semanal",
+    "title_tasks": "Execuções semanais",
+    "title_errors": "Erros semanais",
+    "partial_label": "{{range}} (parcial · {{covered}} / 7 dias)"
+  },
+  "errors": {
+    "kpi_failed_label": "Execuções falhadas · {{days}}D",
+    "kpi_failed_hint": "De {{total}} execuções",
+    "kpi_rate_label": "Taxa de falha · {{days}}D",
+    "kpi_agents_label": "Agentes afetados · {{days}}D",
+    "kpi_agents_hint": "Pior {{name}} · {{count}}",
+    "tooltip_rate": "Taxa de erro",
+    "class": {
+      "auth": "Autenticação",
+      "rate_limit": "Limite de taxa",
+      "timeout": "Tempo limite",
+      "provider": "Provedor",
+      "runtime": "Tempo de execução",
+      "agent": "Agente",
+      "other": "Outro"
+    },
+    "title": "Erros",
+    "summary": "{{failed}} de {{total}} execuções falharam · {{rate}}",
+    "mix_title": "Mistura de falhas · {{failed}}",
+    "mix_label": "Mistura de falhas",
+    "codes_label": "Códigos de erro",
+    "by_agent": "Principais infratores",
+    "sort_label": "Classificar infratores por",
+    "sort_failed": "Falhas",
+    "sort_rate": "Taxa",
+    "header_agent": "Agente",
+    "header_failed": "Falhado",
+    "header_runs": "Execuções",
+    "header_rate": "Taxa",
+    "other_agents": "Outros agentes",
+    "low_sample": "Menos de {{count}} execuções nesta janela — esta taxa não é significativa.",
+    "no_data": "Nenhuma execução falhada nesta janela.",
+    "show_reasons": "Mostrar códigos de erro",
+    "hide_reasons": "Ocultar códigos de erro",
+    "show_all": "Mostrar todos {{count}}",
+    "show_less": "Mostrar {{count}} principais"
+  },
+  "leaderboard": {
+    "title": "Placar",
+    "caption": "{{count}} agentes",
+    "caption_with_deleted": "{{count}} agentes · {{deleted}} deletados",
+    "sort_label": "Classificar agentes por",
+    "deleted_agents": "Agentes deletados",
+    "other_agents": "Outros agentes",
+    "header_agent": "Agente",
+    "header_tokens": "Tokens",
+    "header_cost": "Custo",
+    "header_time": "Tempo",
+    "header_tasks": "Execuções",
+    "usage_unreported_one": "{{count}} execução não reportou uso",
+    "usage_unreported_other": "{{count}} execuções não reportaram uso",
+    "usage_unreported_pending_one": "{{count}} execução não reportou uso · totais ainda estão sendo processados",
+    "usage_unreported_pending_other": "{{count}} execuções não reportaram uso · totais ainda estão sendo processados",
+    "usage_totals_pending": "Totais de uso ainda estão sendo processados",
+    "show_all": "Mostrar tudo",
+    "show_less": "Mostrar {{count}} principais",
+    "no_data": "Nenhuma atividade de agente nesta janela."
+  },
+  "empty": {
+    "title": "Nenhum uso ainda",
+    "body": "Execute agentes para ver o uso de tokens e tempo de execução."
+  },
+  "duration": {
+    "less_than_minute": "<1m"
+  }
+}

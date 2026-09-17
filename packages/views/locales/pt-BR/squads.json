@@ -1,0 +1,148 @@
+{
+  "page": {
+    "title": "Squads",
+    "new_button": "Novo Squad",
+    "empty_no_squads": "Sem squads ainda.",
+    "empty_no_match": "Nenhum squad corresponde aos seus filtros.",
+    "table": {
+      "name": "Squad",
+      "leader": "Líder",
+      "members": "Membros",
+      "creator": "Criado por",
+      "created": "Data de criação"
+    },
+    "no_matches": "Nenhum squad corresponde",
+    "row_menu": "Ações do squad",
+    "archive_action": "Arquivar"
+  },
+  "inspector": {
+    "details_section": "Detalhes",
+    "archive_button": "Arquivar"
+  },
+  "member_type": {
+    "agent": "Agente",
+    "member": "Membro"
+  },
+  "archive_dialog": {
+    "title": "Arquivar este squad?",
+    "description": "\"{{name}}\" será arquivado. Issues atualmente atribuídas a este squad serão transferidas para seu líder. Isso não pode ser desfeito — crie um novo squad se você precisar reativar o roteamento.",
+    "cancel": "Cancelar",
+    "confirm": "Arquivar",
+    "archiving": "Arquivando…",
+    "success": "Squad arquivado"
+  },
+  "name_editor": {
+    "title": "Renomear squad",
+    "placeholder": "Nome do squad",
+    "required": "Nome é obrigatório",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "saved": "Salvo",
+    "save_failed": "Falha ao salvar"
+  },
+  "add_member_dialog": {
+    "title": "Adicionar Membro",
+    "description": "Escolha membros do workspace ou agentes.",
+    "label_member": "Membro",
+    "label_role": "Função",
+    "label_optional": "(opcional)",
+    "cancel": "Cancelar",
+    "select_target": "Selecione um membro ou agente",
+    "search_placeholder": "Buscar membros ou agentes...",
+    "members_section": "Membros",
+    "agents_section": "Agentes",
+    "role_placeholder": "ex: Revisor, Líder de Frontend",
+    "add": "Adicionar"
+  },
+  "role_editor": {
+    "empty": "Adicionar função…",
+    "placeholder": "Função (ex: Revisor)"
+  },
+  "description_dialog": {
+    "title": "Editar descrição",
+    "placeholder_empty": "Adicionar uma descrição",
+    "cancel": "Cancelar",
+    "responsibility_placeholder": "Pelo o que este squad é responsável?",
+    "save": "Salvar"
+  },
+  "discard_changes_dialog": {
+    "title": "Descartar alterações não salvas?",
+    "description": "Você tem alterações não salvas nesta aba. Trocar de aba descartará as alterações.",
+    "keep_editing": "Continuar editando",
+    "discard_button": "Descartar"
+  },
+  "members_tab": {
+    "section_title": "Membros",
+    "section_count_one": "{{count}} membro neste squad",
+    "section_count_other": "{{count}} membros neste squad",
+    "add_member_button": "Adicionar Membro",
+    "create_agent_button": "Criar Agente",
+    "leader_chip": "Líder",
+    "view_agent_tooltip": "Abrir detalhes do agente",
+    "make_leader_tooltip": "Tornar líder do squad",
+    "remove_member_tooltip": "Remover do squad",
+    "status_working": "Trabalhando",
+    "status_idle": "Ocioso",
+    "status_offline": "Desconectado",
+    "status_unstable": "Instável",
+    "status_archived": "Arquivado",
+    "issue_status_blocked": "bloqueada",
+    "active_issue_more": "e {{count}} mais",
+    "last_active_label": "última atividade {{time}}"
+  },
+  "detail_tabs": {
+    "members": "Membros",
+    "instructions": "Instruções"
+  },
+  "details": {
+    "leader": "Líder",
+    "members": "Membros",
+    "created_by": "Criado por",
+    "created": "Criado",
+    "updated": "Atualizado"
+  },
+  "toasts": {
+    "member_added": "Membro adicionado",
+    "member_add_failed": "Falha ao adicionar membro",
+    "member_removed": "Membro removido",
+    "member_remove_failed": "Falha ao remover membro",
+    "role_updated": "Função atualizada",
+    "role_update_failed": "Falha ao atualizar função",
+    "leader_updated": "Líder atualizado",
+    "leader_update_failed": "Falha ao atualizar líder",
+    "archive_failed": "Falha ao arquivar squad",
+    "instructions_saved": "Instruções salvas"
+  },
+  "profile_card": {
+    "unavailable": "Squad indisponível",
+    "detail_link": "Detalhes →",
+    "archived": "Arquivado",
+    "member_count_one": "{{count}} membro",
+    "member_count_other": "{{count}} membros",
+    "members_section": "Membros",
+    "more_members_one": "+{{count}} mais",
+    "more_members_other": "+{{count}} mais"
+  },
+  "instructions_tab": {
+    "description": "O líder lê estas instruções sempre que trabalha em uma issue atribuída a este squad.",
+    "unsaved_changes": "Alterações não salvas",
+    "save_button": "Salvar",
+    "placeholder": "ex: Sempre comece escrevendo um teste que falha. Prefira commits pequenos e atômicos."
+  },
+  "scope": {
+    "mine": "Minhas",
+    "all": "Todas"
+  },
+  "toolbar": {
+    "display": "Exibição",
+    "sort_by": "Ordenar por",
+    "direction_asc": "Crescente",
+    "direction_desc": "Decrescente",
+    "section_columns": "Colunas",
+    "result_count_title": "Squads correspondentes / todos os squads",
+    "filter_label": "Filtro",
+    "filter_active_count_one": "{{count}} filtro",
+    "filter_active_count_other": "{{count}} filtros",
+    "clear_filters": "Limpar filtros"
+  }
+}
