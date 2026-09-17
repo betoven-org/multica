@@ -51,6 +51,25 @@ services:
       - default
     restart: unless-stopped
 
+  tools:
+    build:
+      context: ./services/tools
+      dockerfile: Dockerfile
+    expose:
+      - "8090"
+    volumes:
+      - tools-data:/data/memory
+    environment:
+      - ODUS_MEMORY_DIR=/data/memory
+      - FIGMA_TOKEN=${FIGMA_TOKEN:-}
+    networks:
+      - coolify
+      - default
+    restart: unless-stopped
+
+volumes:
+  tools-data:
+
 networks:
   coolify:
     external: true

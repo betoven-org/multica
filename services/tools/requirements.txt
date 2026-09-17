@@ -1,0 +1,5 @@
+fastapi==0.115.0
+uvicorn==0.30.0
+playwright==1.48.0
+mem0ai==2.0.20
+sentence-transformers==6.0.1
