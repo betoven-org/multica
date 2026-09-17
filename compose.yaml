@@ -27,6 +27,11 @@ services:
       - ANALYTICS_DISABLED=true
       - RESEND_API_KEY=${RESEND_API_KEY:-}
       - RESEND_FROM_EMAIL=${RESEND_FROM_EMAIL:-noreply@oduscommerce.com.br}
+      - FRONTEND_ORIGIN=${FRONTEND_ORIGIN:-https://task.oduscommerce.com.br}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-https://task.oduscommerce.com.br}
+      - ALLOW_SIGNUP=${ALLOW_SIGNUP:-false}
+      - ALLOWED_EMAIL_DOMAINS=${ALLOWED_EMAIL_DOMAINS:-wavecommerce.com.br,oduscommerce.com.br}
+      - ALLOWED_EMAILS=${ALLOWED_EMAILS:-wesleymoraesserafim@gmail.com}
     networks:
       - coolify
       - default
