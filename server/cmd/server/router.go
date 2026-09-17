@@ -1962,6 +1962,13 @@ func NewRouterWithOptions(pool *pgxpool.Pool, hub *realtime.Hub, bus *events.Bus
 				})
 			})
 
+			// Timesheet
+			r.Route("/api/timesheet", func(r chi.Router) {
+				r.Get("/", h.ListTimeEntries)
+				r.Post("/", h.CreateTimeEntry)
+				r.Get("/summary", h.GetTimesheetSummary)
+			})
+
 			// Labels
 			r.Route("/api/labels", func(r chi.Router) {
 				r.Get("/", h.ListLabels)
