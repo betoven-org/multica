@@ -28,11 +28,6 @@ services:
       - RESEND_API_KEY=${RESEND_API_KEY:-}
       - RESEND_FROM_EMAIL=${RESEND_FROM_EMAIL:-noreply@oduscommerce.com.br}
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:8080/healthz"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
 
   frontend:
     build:
@@ -43,8 +38,7 @@ services:
     expose:
       - "3000"
     depends_on:
-      backend:
-        condition: service_healthy
+      - backend
     environment:
       - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://backend:8080}
     restart: unless-stopped
