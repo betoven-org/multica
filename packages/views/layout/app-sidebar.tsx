@@ -913,7 +913,9 @@ export function AppSidebar({ topSlot, searchSlot, headerClassName, headerStyle }
 
         <SidebarFooter className="p-2">
           <SidebarMenu className="gap-0.5">
-            {utilityNav.map((item) => {
+            {utilityNav
+              .filter((item) => item.key !== "usage" || currentRole === "owner" || currentRole === "admin")
+              .map((item) => {
               const href = p[item.key]();
               const Icon = routeIconForPath(href);
               return (
