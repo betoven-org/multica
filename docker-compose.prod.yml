@@ -27,6 +27,9 @@ services:
       - ANALYTICS_DISABLED=true
       - RESEND_API_KEY=${RESEND_API_KEY:-}
       - RESEND_FROM_EMAIL=${RESEND_FROM_EMAIL:-noreply@oduscommerce.com.br}
+    networks:
+      - coolify
+      - default
     restart: unless-stopped
 
   frontend:
@@ -41,4 +44,11 @@ services:
       - backend
     environment:
       - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://backend:8080}
+    networks:
+      - coolify
+      - default
     restart: unless-stopped
+
+networks:
+  coolify:
+    external: true
