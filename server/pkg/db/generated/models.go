@@ -1319,6 +1319,7 @@ type Squad struct {
 	ArchivedBy   pgtype.UUID        `json:"archived_by"`
 	AvatarUrl    pgtype.Text        `json:"avatar_url"`
 	Instructions string             `json:"instructions"`
+	IsGlobal     bool               `json:"is_global"`
 }
 
 type SquadMember struct {
