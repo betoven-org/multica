@@ -53,6 +53,7 @@ type Agent struct {
 	DisabledRuntimeSkills []byte      `json:"disabled_runtime_skills"`
 	ServiceTier           pgtype.Text `json:"service_tier"`
 	ConversationStarters  []byte      `json:"conversation_starters"`
+	IsGlobal              bool        `json:"is_global"`
 }
 
 type AgentBuilderDraft struct {
@@ -1238,6 +1239,7 @@ type QuickAction struct {
 	CreatedByID   pgtype.UUID        `json:"created_by_id"`
 	CreatedAt     pgtype.Timestamptz `json:"created_at"`
 	UpdatedAt     pgtype.Timestamptz `json:"updated_at"`
+	IsGlobal      bool               `json:"is_global"`
 }
 
 type RuntimeProfile struct {
@@ -1286,6 +1288,7 @@ type Skill struct {
 	CreatedAt            pgtype.Timestamptz `json:"created_at"`
 	UpdatedAt            pgtype.Timestamptz `json:"updated_at"`
 	PluginInstallationID pgtype.UUID        `json:"plugin_installation_id"`
+	IsGlobal             bool               `json:"is_global"`
 }
 
 type SkillFile struct {

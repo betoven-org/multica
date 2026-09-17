@@ -8,7 +8,7 @@
 -- does this workspace actually use". LOWER(name) breaks ties so equal counts
 -- never render in random order.
 SELECT * FROM quick_action
-WHERE workspace_id = sqlc.arg('workspace_id')::uuid
+WHERE (workspace_id = sqlc.arg('workspace_id')::uuid OR is_global = true)
   AND (sqlc.arg('include_archived')::bool OR status = 'active')
   AND (visibility = 'public' OR created_by_id = sqlc.arg('viewer_id')::uuid)
 ORDER BY use_count DESC, LOWER(name) ASC;

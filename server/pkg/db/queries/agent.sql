@@ -1,11 +1,11 @@
 -- name: ListAgents :many
 SELECT * FROM agent
-WHERE workspace_id = $1 AND archived_at IS NULL AND kind = 'user'
+WHERE (workspace_id = $1 OR is_global = true) AND archived_at IS NULL AND kind = 'user'
 ORDER BY created_at ASC;
 
 -- name: ListAllAgents :many
 SELECT * FROM agent
-WHERE workspace_id = $1 AND kind = 'user'
+WHERE (workspace_id = $1 OR is_global = true) AND kind = 'user'
 ORDER BY created_at ASC;
 
 -- name: ListAllAgentsAnyKind :many

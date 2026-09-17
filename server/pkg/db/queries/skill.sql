@@ -2,7 +2,7 @@
 
 -- name: ListSkillsByWorkspace :many
 SELECT * FROM skill
-WHERE workspace_id = $1
+WHERE (workspace_id = $1 OR is_global = true)
 ORDER BY name ASC;
 
 -- name: ListSkillSummariesByWorkspace :many
@@ -12,7 +12,7 @@ ORDER BY name ASC;
 -- and caused 15s CLI timeouts from high-latency regions (GH multica-ai/multica#2174).
 SELECT id, workspace_id, name, description, config, created_by, created_at, updated_at
 FROM skill
-WHERE workspace_id = $1
+WHERE (workspace_id = $1 OR is_global = true)
 ORDER BY name ASC;
 
 -- name: GetSkill :one
@@ -166,5 +166,5 @@ DELETE FROM agent_skill WHERE agent_id = $1;
 SELECT ask.agent_id, s.id, s.name, s.description, ask.enabled
 FROM agent_skill ask
 JOIN skill s ON s.id = ask.skill_id
-WHERE s.workspace_id = $1
+WHERE (s.workspace_id = $1 OR s.is_global = true)
 ORDER BY s.name ASC;

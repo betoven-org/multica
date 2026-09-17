@@ -1,0 +1,3 @@
+ALTER TABLE agent DROP COLUMN IF EXISTS is_global;
+ALTER TABLE skill DROP COLUMN IF EXISTS is_global;
+ALTER TABLE quick_action DROP COLUMN IF EXISTS is_global;

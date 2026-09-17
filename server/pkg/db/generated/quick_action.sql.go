@@ -38,7 +38,7 @@ INSERT INTO quick_action (
     $8::text,
     $9::uuid
 )
-RETURNING id, workspace_id, name, description, assignee_type, assignee_id, prompt, visibility, status, last_used_at, use_count, created_by_type, created_by_id, created_at, updated_at
+RETURNING id, workspace_id, name, description, assignee_type, assignee_id, prompt, visibility, status, last_used_at, use_count, created_by_type, created_by_id, created_at, updated_at, is_global
 `
 
 type CreateQuickActionParams struct {
@@ -82,6 +82,7 @@ func (q *Queries) CreateQuickAction(ctx context.Context, arg CreateQuickActionPa
 		&i.CreatedByID,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.IsGlobal,
 	)
 	return i, err
 }
@@ -122,7 +123,7 @@ func (q *Queries) DeleteQuickAction(ctx context.Context, arg DeleteQuickActionPa
 }
 
 const getQuickAction = `-- name: GetQuickAction :one
-SELECT id, workspace_id, name, description, assignee_type, assignee_id, prompt, visibility, status, last_used_at, use_count, created_by_type, created_by_id, created_at, updated_at FROM quick_action
+SELECT id, workspace_id, name, description, assignee_type, assignee_id, prompt, visibility, status, last_used_at, use_count, created_by_type, created_by_id, created_at, updated_at, is_global FROM quick_action
 WHERE id = $1 AND workspace_id = $2
 `
 
@@ -150,13 +151,14 @@ func (q *Queries) GetQuickAction(ctx context.Context, arg GetQuickActionParams) 
 		&i.CreatedByID,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.IsGlobal,
 	)
 	return i, err
 }
 
 const listQuickActions = `-- name: ListQuickActions :many
-SELECT id, workspace_id, name, description, assignee_type, assignee_id, prompt, visibility, status, last_used_at, use_count, created_by_type, created_by_id, created_at, updated_at FROM quick_action
-WHERE workspace_id = $1::uuid
+SELECT id, workspace_id, name, description, assignee_type, assignee_id, prompt, visibility, status, last_used_at, use_count, created_by_type, created_by_id, created_at, updated_at, is_global FROM quick_action
+WHERE (workspace_id = $1::uuid OR is_global = true)
   AND ($2::bool OR status = 'active')
   AND (visibility = 'public' OR created_by_id = $3::uuid)
 ORDER BY use_count DESC, LOWER(name) ASC
@@ -201,6 +203,7 @@ func (q *Queries) ListQuickActions(ctx context.Context, arg ListQuickActionsPara
 			&i.CreatedByID,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.IsGlobal,
 		); err != nil {
 			return nil, err
 		}
@@ -243,7 +246,7 @@ UPDATE quick_action SET
     status = COALESCE($9, status),
     updated_at = now()
 WHERE id = $1 AND workspace_id = $2
-RETURNING id, workspace_id, name, description, assignee_type, assignee_id, prompt, visibility, status, last_used_at, use_count, created_by_type, created_by_id, created_at, updated_at
+RETURNING id, workspace_id, name, description, assignee_type, assignee_id, prompt, visibility, status, last_used_at, use_count, created_by_type, created_by_id, created_at, updated_at, is_global
 `
 
 type UpdateQuickActionParams struct {
@@ -290,6 +293,7 @@ func (q *Queries) UpdateQuickAction(ctx context.Context, arg UpdateQuickActionPa
 		&i.CreatedByID,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.IsGlobal,
 	)
 	return i, err
 }
