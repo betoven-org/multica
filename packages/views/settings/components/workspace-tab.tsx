@@ -506,7 +506,7 @@ export function WorkspaceTab() {
                   placeholder="0"
                 />
                 <span className="text-sm text-muted-foreground">hours/month</span>
-                <SettingsSaveState status={hoursSaveStatus} />
+                <SettingsSaveState status={hoursSaveStatus} savingLabel="Saving..." savedLabel="Saved" errorLabel="Error" />
               </div>
             </SettingsRow>
 

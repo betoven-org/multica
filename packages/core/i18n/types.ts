@@ -1,4 +1,5 @@
-export type SupportedLocale = "en";
+// Keep type union broad for compile compat; runtime only uses "en".
+export type SupportedLocale = "en" | "zh-Hans" | "ko" | "ja" | "fr";
 
 export const SUPPORTED_LOCALES: SupportedLocale[] = ["en"];
 export const DEFAULT_LOCALE: SupportedLocale = "en";
