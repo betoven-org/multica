@@ -115,9 +115,12 @@ SELECT agent_id, skill_id, enabled FROM agent_skill WHERE agent_id = $1;
 -- Agent-Skill junction
 
 -- name: ListAgentSkills :many
+-- Runtime skill loading: only locally-owned skills are injected into the agent
+-- context. Global (inherited) skills are reference material — they must be
+-- explicitly cloned as local copies and assigned to be used at runtime.
 SELECT s.* FROM skill s
 JOIN agent_skill ask ON ask.skill_id = s.id
-WHERE ask.agent_id = $1 AND ask.enabled = TRUE
+WHERE ask.agent_id = $1 AND ask.enabled = TRUE AND s.is_global = false
 ORDER BY s.name ASC;
 
 -- name: ListAgentSkillsByIDs :many
@@ -131,6 +134,7 @@ SELECT s.* FROM skill s
 JOIN agent_skill ask ON ask.skill_id = s.id
 WHERE ask.agent_id = $1
   AND ask.enabled = TRUE
+  AND s.is_global = false
   AND s.id = ANY(sqlc.arg('skill_ids')::uuid[])
 ORDER BY s.name ASC;
 
