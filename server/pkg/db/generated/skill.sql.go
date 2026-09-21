@@ -324,14 +324,14 @@ const listAgentSkills = `-- name: ListAgentSkills :many
 
 SELECT s.id, s.workspace_id, s.name, s.description, s.content, s.config, s.created_by, s.created_at, s.updated_at, s.plugin_installation_id, s.is_global FROM skill s
 JOIN agent_skill ask ON ask.skill_id = s.id
-WHERE ask.agent_id = $1 AND ask.enabled = TRUE AND s.is_global = false
+WHERE ask.agent_id = $1 AND ask.enabled = TRUE
 ORDER BY s.name ASC
 `
 
 // Agent-Skill junction
-// Runtime skill loading: only locally-owned skills are injected into the agent
-// context. Global (inherited) skills are reference material — they must be
-// explicitly cloned as local copies and assigned to be used at runtime.
+// Runtime skill loading: only skills explicitly bound to the agent via
+// agent_skill with enabled=true are injected into context. Global skills
+// are NOT auto-added — they only load when an admin manually binds them.
 func (q *Queries) ListAgentSkills(ctx context.Context, agentID pgtype.UUID) ([]Skill, error) {
 	rows, err := q.db.Query(ctx, listAgentSkills, agentID)
 	if err != nil {
@@ -369,7 +369,6 @@ SELECT s.id, s.workspace_id, s.name, s.description, s.content, s.config, s.creat
 JOIN agent_skill ask ON ask.skill_id = s.id
 WHERE ask.agent_id = $1
   AND ask.enabled = TRUE
-  AND s.is_global = false
   AND s.id = ANY($2::uuid[])
 ORDER BY s.name ASC
 `
