@@ -40,7 +40,7 @@ func TestSignupGating(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			h := newTestHandler(tt.cfg)
-			err := h.checkSignupAllowed(tt.email, tt.isNew)
+			err := h.checkSignupAllowed(context.Background(), tt.email, tt.isNew)
 			if !errors.Is(err, tt.want) {
 				t.Fatalf("got err=%v want=%v", err, tt.want)
 			}
