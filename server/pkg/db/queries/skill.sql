@@ -29,6 +29,9 @@ WHERE skill.id = $1 AND (skill.workspace_id = $2 OR (skill.is_global = true AND 
 SELECT * FROM skill
 WHERE (skill.workspace_id = $1 OR (skill.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) AND skill.name = $2;
 
+-- name: ListGlobalSkills :many
+SELECT * FROM skill WHERE is_global = true;
+
 -- name: CreateSkill :one
 INSERT INTO skill (workspace_id, name, description, content, config, created_by)
 VALUES ($1, $2, $3, $4, $5, $6)
@@ -105,6 +108,9 @@ DELETE FROM skill_file WHERE id = $1;
 
 -- name: DeleteSkillFilesBySkill :exec
 DELETE FROM skill_file WHERE skill_id = $1;
+
+-- name: ListAgentSkillJunctions :many
+SELECT agent_id, skill_id, enabled FROM agent_skill WHERE agent_id = $1;
 
 -- Agent-Skill junction
 

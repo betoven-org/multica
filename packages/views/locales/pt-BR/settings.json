@@ -699,6 +699,8 @@
   },
   "workspace": {
     "section_general": "Workspace details",
+    "inherit_global_label": "Herdar agents e skills compartilhados",
+    "inherit_global_description": "Quando ativado, este workspace vê agents, skills, squads e ações rápidas compartilhados na plataforma.",
     "logo_label": "Workspace logo",
     "change_logo_aria": "Change workspace logo",
     "click_logo_hint": "Click the logo to upload a new image",

@@ -13,6 +13,7 @@ import {
   FieldLabel,
 } from "@multica/ui/components/ui/field";
 import { cn } from "@multica/ui/lib/utils";
+import { Switch } from "@multica/ui/components/ui/switch";
 import { useCreateWorkspace } from "@multica/core/workspace/mutations";
 import type { Workspace } from "@multica/core/types";
 import { isImeComposing } from "@multica/core/utils";
@@ -139,6 +140,7 @@ export function StepWorkspace({
   // default would never go looking.
   const [prefix, setPrefix] = useState("");
   const prefixTouched = useRef(false);
+  const [inheritGlobal, setInheritGlobal] = useState(true);
 
   const slugValidationError =
     slug.length > 0 && !WORKSPACE_SLUG_REGEX.test(slug)
@@ -208,6 +210,7 @@ export function StepWorkspace({
         // created workspace agree either way — but submitting it explicitly
         // is what makes an edited prefix stick.
         issue_prefix: effectivePrefix,
+        inherit_global_items: inheritGlobal,
       },
       {
         onSuccess: onCreated,
@@ -384,6 +387,23 @@ export function StepWorkspace({
             t(($) => $.step_workspace.issue_prefix_pending)
           )}
         </FieldDescription>
+      </Field>
+      <Field>
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex flex-col gap-0.5">
+            <FieldLabel htmlFor="ws-inherit-global">
+              {t(($) => $.step_workspace.inherit_global_label)}
+            </FieldLabel>
+            <FieldDescription>
+              {t(($) => $.step_workspace.inherit_global_description)}
+            </FieldDescription>
+          </div>
+          <Switch
+            id="ws-inherit-global"
+            checked={inheritGlobal}
+            onCheckedChange={setInheritGlobal}
+          />
+        </div>
       </Field>
     </FieldGroup>
   );

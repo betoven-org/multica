@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { LogOut } from "lucide-react";
 import { Input } from "@multica/ui/components/ui/input";
+import { Switch } from "@multica/ui/components/ui/switch";
 import { Textarea } from "@multica/ui/components/ui/textarea";
 import { Button } from "@multica/ui/components/ui/button";
 import {
@@ -507,6 +508,38 @@ export function WorkspaceTab() {
                 />
                 <span className="text-sm text-muted-foreground">hours/month</span>
                 <SettingsSaveState status={hoursSaveStatus} savingLabel="Saving..." savedLabel="Saved" errorLabel="Error" />
+              </div>
+            </SettingsRow>
+
+            <SettingsRow
+              label={t(($) => $.workspace.inherit_global_label)}
+              description={t(($) => $.workspace.inherit_global_description)}
+              size="none"
+            >
+              <div className="flex justify-start sm:justify-end">
+                <Switch
+                  checked={workspace.inherit_global_items}
+                  disabled={!canManageWorkspace}
+                  onCheckedChange={async (checked) => {
+                    try {
+                      const updated = await api.updateWorkspace(workspace.id, {
+                        inherit_global_items: checked,
+                      });
+                      qc.setQueryData(workspaceKeys.list(), (old: Workspace[] | undefined) =>
+                        old?.map((ws) => (ws.id === updated.id ? updated : ws)),
+                      );
+                      toast.success(t(($) => $.workspace.toast_saved), {
+                        id: "settings-auto-save",
+                      });
+                    } catch (error) {
+                      toast.error(
+                        error instanceof Error
+                          ? error.message
+                          : t(($) => $.workspace.toast_save_failed),
+                      );
+                    }
+                  }}
+                />
               </div>
             </SettingsRow>
 

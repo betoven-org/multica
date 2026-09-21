@@ -167,6 +167,8 @@
     "issue_prefix_prefix": "As issues parecerão ",
     "issue_prefix_suffix": ". Você pode mudar isso depois nas configurações.",
     "issue_prefix_pending": "Defina a URL acima e os números das issues o seguirão — ou digite um prefixo aqui.",
+    "inherit_global_label": "Herdar agents e skills compartilhados",
+    "inherit_global_description": "Incluir agents, skills, squads e ações rápidas compartilhados na plataforma.",
     "create_new_title": "Criar um novo workspace",
     "hint_opening": "Abrindo {{name}}.",
     "hint_creating": "Criando {{name}}.",

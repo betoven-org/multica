@@ -204,6 +204,36 @@ func (q *Queries) GetSkillInWorkspace(ctx context.Context, arg GetSkillInWorkspa
 	return i, err
 }
 
+const listAgentSkillJunctions = `-- name: ListAgentSkillJunctions :many
+SELECT agent_id, skill_id, enabled FROM agent_skill WHERE agent_id = $1
+`
+
+type ListAgentSkillJunctionsRow struct {
+	AgentID pgtype.UUID `json:"agent_id"`
+	SkillID pgtype.UUID `json:"skill_id"`
+	Enabled bool        `json:"enabled"`
+}
+
+func (q *Queries) ListAgentSkillJunctions(ctx context.Context, agentID pgtype.UUID) ([]ListAgentSkillJunctionsRow, error) {
+	rows, err := q.db.Query(ctx, listAgentSkillJunctions, agentID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []ListAgentSkillJunctionsRow{}
+	for rows.Next() {
+		var i ListAgentSkillJunctionsRow
+		if err := rows.Scan(&i.AgentID, &i.SkillID, &i.Enabled); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const listAgentSkillNamesByAgentIDs = `-- name: ListAgentSkillNamesByAgentIDs :many
 SELECT ask.agent_id, s.name
 FROM agent_skill ask
@@ -414,6 +444,42 @@ func (q *Queries) ListAgentSkillsByWorkspace(ctx context.Context, workspaceID pg
 			&i.Name,
 			&i.Description,
 			&i.Enabled,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const listGlobalSkills = `-- name: ListGlobalSkills :many
+SELECT id, workspace_id, name, description, content, config, created_by, created_at, updated_at, plugin_installation_id, is_global FROM skill WHERE is_global = true
+`
+
+func (q *Queries) ListGlobalSkills(ctx context.Context) ([]Skill, error) {
+	rows, err := q.db.Query(ctx, listGlobalSkills)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []Skill{}
+	for rows.Next() {
+		var i Skill
+		if err := rows.Scan(
+			&i.ID,
+			&i.WorkspaceID,
+			&i.Name,
+			&i.Description,
+			&i.Content,
+			&i.Config,
+			&i.CreatedBy,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.PluginInstallationID,
+			&i.IsGlobal,
 		); err != nil {
 			return nil, err
 		}

@@ -21,6 +21,9 @@ WHERE quick_action.id = $1 AND (quick_action.workspace_id = $2 OR (quick_action.
 SELECT COUNT(*) FROM quick_action
 WHERE workspace_id = $1 AND status = 'active';
 
+-- name: ListGlobalQuickActions :many
+SELECT * FROM quick_action WHERE is_global = true AND status = 'active';
+
 -- name: CreateQuickAction :one
 INSERT INTO quick_action (
     workspace_id, name, description, assignee_type, assignee_id, prompt,

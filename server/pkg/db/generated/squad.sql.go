@@ -273,6 +273,44 @@ func (q *Queries) ListAllSquads(ctx context.Context, workspaceID pgtype.UUID) ([
 	return items, nil
 }
 
+const listGlobalSquads = `-- name: ListGlobalSquads :many
+SELECT id, workspace_id, name, description, leader_id, creator_id, created_at, updated_at, archived_at, archived_by, avatar_url, instructions, is_global FROM squad WHERE is_global = true AND archived_at IS NULL
+`
+
+func (q *Queries) ListGlobalSquads(ctx context.Context) ([]Squad, error) {
+	rows, err := q.db.Query(ctx, listGlobalSquads)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []Squad{}
+	for rows.Next() {
+		var i Squad
+		if err := rows.Scan(
+			&i.ID,
+			&i.WorkspaceID,
+			&i.Name,
+			&i.Description,
+			&i.LeaderID,
+			&i.CreatorID,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.ArchivedAt,
+			&i.ArchivedBy,
+			&i.AvatarUrl,
+			&i.Instructions,
+			&i.IsGlobal,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const listSquadMemberPreviewRows = `-- name: ListSquadMemberPreviewRows :many
 SELECT
     sm.squad_id,

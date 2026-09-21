@@ -52,6 +52,9 @@ SELECT * FROM agent
 WHERE id = $1 AND workspace_id = $2 AND kind = 'user'
 FOR SHARE;
 
+-- name: ListGlobalAgents :many
+SELECT * FROM agent WHERE is_global = true AND kind = 'user' AND archived_at IS NULL;
+
 -- name: CreateAgent :one
 INSERT INTO agent (
     workspace_id, name, description, avatar_url, runtime_mode,

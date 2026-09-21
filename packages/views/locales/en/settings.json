@@ -699,6 +699,8 @@
   },
   "workspace": {
     "section_general": "Workspace details",
+    "inherit_global_label": "Inherit shared agents and skills",
+    "inherit_global_description": "When enabled, this workspace sees agents, skills, squads, and quick actions shared across the platform.",
     "logo_label": "Workspace logo",
     "change_logo_aria": "Change workspace logo",
     "click_logo_hint": "Click the logo to upload a new image",

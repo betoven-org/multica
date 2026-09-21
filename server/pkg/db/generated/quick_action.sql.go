@@ -156,6 +156,47 @@ func (q *Queries) GetQuickAction(ctx context.Context, arg GetQuickActionParams) 
 	return i, err
 }
 
+const listGlobalQuickActions = `-- name: ListGlobalQuickActions :many
+SELECT id, workspace_id, name, description, assignee_type, assignee_id, prompt, visibility, status, last_used_at, use_count, created_by_type, created_by_id, created_at, updated_at, is_global FROM quick_action WHERE is_global = true AND status = 'active'
+`
+
+func (q *Queries) ListGlobalQuickActions(ctx context.Context) ([]QuickAction, error) {
+	rows, err := q.db.Query(ctx, listGlobalQuickActions)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []QuickAction{}
+	for rows.Next() {
+		var i QuickAction
+		if err := rows.Scan(
+			&i.ID,
+			&i.WorkspaceID,
+			&i.Name,
+			&i.Description,
+			&i.AssigneeType,
+			&i.AssigneeID,
+			&i.Prompt,
+			&i.Visibility,
+			&i.Status,
+			&i.LastUsedAt,
+			&i.UseCount,
+			&i.CreatedByType,
+			&i.CreatedByID,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.IsGlobal,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const listQuickActions = `-- name: ListQuickActions :many
 SELECT id, workspace_id, name, description, assignee_type, assignee_id, prompt, visibility, status, last_used_at, use_count, created_by_type, created_by_id, created_at, updated_at, is_global FROM quick_action
 WHERE (workspace_id = $1::uuid OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1::uuid AND w2.inherit_global_items = true)))

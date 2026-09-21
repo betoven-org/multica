@@ -1,3 +1,6 @@
+-- name: ListGlobalSquads :many
+SELECT * FROM squad WHERE is_global = true AND archived_at IS NULL;
+
 -- name: CreateSquad :one
 INSERT INTO squad (workspace_id, name, description, leader_id, creator_id, avatar_url)
 VALUES ($1, $2, $3, $4, $5, $6)
