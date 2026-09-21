@@ -162,7 +162,14 @@ func (h *Handler) ListWorkspaces(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	workspaces, err := h.Queries.ListWorkspaces(r.Context(), parseUUID(userID))
+	var workspaces []db.Workspace
+	var err error
+
+	if h.isPlatformAdminRequest(r) {
+		workspaces, err = h.Queries.ListAllWorkspaces(r.Context())
+	} else {
+		workspaces, err = h.Queries.ListWorkspaces(r.Context(), parseUUID(userID))
+	}
 	if err != nil {
 		writeError(w, http.StatusInternalServerError, "failed to list workspaces")
 		return

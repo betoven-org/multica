@@ -69,6 +69,11 @@ type Config struct {
 	AllowSignup         bool
 	AllowedEmails       []string
 	AllowedEmailDomains []string
+	// PlatformAdminEmails lists emails that are platform-wide administrators.
+	// Platform admins can see all workspaces and are auto-added as owner
+	// when they access a workspace they are not yet a member of.
+	// Populated from PLATFORM_ADMIN_EMAILS (comma-separated).
+	PlatformAdminEmails []string
 	// DisableWorkspaceCreation, when true, makes POST /api/workspaces return
 	// 403 for every caller. There is no role/owner exception because the repo
 	// has no platform-admin concept; operators bootstrap the workspace with
@@ -819,6 +824,28 @@ func isCheckViolation(err error) bool {
 
 func requestUserID(r *http.Request) string {
 	return r.Header.Get("X-User-ID")
+}
+
+func requestUserEmail(r *http.Request) string {
+	return r.Header.Get("X-User-Email")
+}
+
+// isPlatformAdmin checks if the given email is in the platform admin list.
+func (h *Handler) isPlatformAdmin(email string) bool {
+	if email == "" || len(h.cfg.PlatformAdminEmails) == 0 {
+		return false
+	}
+	for _, admin := range h.cfg.PlatformAdminEmails {
+		if strings.EqualFold(admin, email) {
+			return true
+		}
+	}
+	return false
+}
+
+// isPlatformAdminRequest checks if the current request is from a platform admin.
+func (h *Handler) isPlatformAdminRequest(r *http.Request) bool {
+	return h.isPlatformAdmin(requestUserEmail(r))
 }
 
 // resolveActor determines whether the request is from an agent or a human member.

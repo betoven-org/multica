@@ -3,12 +3,32 @@ package middleware
 import (
 	"context"
 	"errors"
+	"log/slog"
 	"net/http"
+	"strings"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/multica-ai/multica/server/internal/util"
 	db "github.com/multica-ai/multica/server/pkg/db/generated"
 )
+
+// PlatformAdminEmails is set during server startup from the
+// PLATFORM_ADMIN_EMAILS env var. Platform admins are auto-added as
+// owner to any workspace they access.
+var PlatformAdminEmails []string
+
+// IsPlatformAdmin checks if the email is a platform administrator.
+func IsPlatformAdmin(email string) bool {
+	if email == "" {
+		return false
+	}
+	for _, admin := range PlatformAdminEmails {
+		if strings.EqualFold(admin, email) {
+			return true
+		}
+	}
+	return false
+}
 
 // Context keys for workspace-scoped request data.
 type contextKey int
@@ -240,8 +260,23 @@ func buildMiddleware(queries *db.Queries, resolve workspaceResolver, roles []str
 				WorkspaceID: wsUUID,
 			})
 			if err != nil {
-				writeError(w, http.StatusNotFound, "workspace not found")
-				return
+				// Platform admins are auto-added as owner to any workspace.
+				email := r.Header.Get("X-User-Email")
+				if !IsPlatformAdmin(email) {
+					writeError(w, http.StatusNotFound, "workspace not found")
+					return
+				}
+				member, err = queries.CreateMember(r.Context(), db.CreateMemberParams{
+					WorkspaceID: wsUUID,
+					UserID:      userUUID,
+					Role:        "owner",
+				})
+				if err != nil {
+					slog.Warn("platform admin auto-join failed", "email", email, "workspace_id", workspaceID, "error", err)
+					writeError(w, http.StatusInternalServerError, "failed to join workspace")
+					return
+				}
+				slog.Info("platform admin auto-joined workspace", "email", email, "workspace_id", workspaceID)
 			}
 
 			if len(roles) > 0 {
