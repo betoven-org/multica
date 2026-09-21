@@ -1,11 +1,11 @@
 -- name: ListAgents :many
 SELECT * FROM agent
-WHERE (workspace_id = $1 OR is_global = true) AND archived_at IS NULL AND kind = 'user'
+WHERE (workspace_id = $1 OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) AND archived_at IS NULL AND kind = 'user'
 ORDER BY created_at ASC;
 
 -- name: ListAllAgents :many
 SELECT * FROM agent
-WHERE (workspace_id = $1 OR is_global = true) AND kind = 'user'
+WHERE (workspace_id = $1 OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) AND kind = 'user'
 ORDER BY created_at ASC;
 
 -- name: ListAllAgentsAnyKind :many
@@ -36,7 +36,7 @@ FOR UPDATE;
 
 -- name: GetAgentInWorkspace :one
 SELECT * FROM agent
-WHERE id = $1 AND (workspace_id = $2 OR is_global = true) AND kind = 'user';
+WHERE agent.id = $1 AND (agent.workspace_id = $2 OR (agent.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $2 AND w2.inherit_global_items = true))) AND agent.kind = 'user';
 
 -- name: LockAgentForAutopilotAssignment :one
 -- Serializes creating, retargeting, or resuming an active Autopilot with

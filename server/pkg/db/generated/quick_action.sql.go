@@ -124,7 +124,7 @@ func (q *Queries) DeleteQuickAction(ctx context.Context, arg DeleteQuickActionPa
 
 const getQuickAction = `-- name: GetQuickAction :one
 SELECT id, workspace_id, name, description, assignee_type, assignee_id, prompt, visibility, status, last_used_at, use_count, created_by_type, created_by_id, created_at, updated_at, is_global FROM quick_action
-WHERE id = $1 AND (workspace_id = $2 OR is_global = true)
+WHERE quick_action.id = $1 AND (quick_action.workspace_id = $2 OR (quick_action.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $2 AND w2.inherit_global_items = true)))
 `
 
 type GetQuickActionParams struct {
@@ -158,7 +158,7 @@ func (q *Queries) GetQuickAction(ctx context.Context, arg GetQuickActionParams) 
 
 const listQuickActions = `-- name: ListQuickActions :many
 SELECT id, workspace_id, name, description, assignee_type, assignee_id, prompt, visibility, status, last_used_at, use_count, created_by_type, created_by_id, created_at, updated_at, is_global FROM quick_action
-WHERE (workspace_id = $1::uuid OR is_global = true)
+WHERE (workspace_id = $1::uuid OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1::uuid AND w2.inherit_global_items = true)))
   AND ($2::bool OR status = 'active')
   AND (visibility = 'public' OR created_by_id = $3::uuid)
 ORDER BY use_count DESC, LOWER(name) ASC

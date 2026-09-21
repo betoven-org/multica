@@ -15,6 +15,7 @@ export interface Workspace {
   repos: WorkspaceRepo[];
   issue_prefix: string;
   avatar_url: string | null;
+  inherit_global_items: boolean;
   created_at: string;
   updated_at: string;
 }

@@ -7,7 +7,7 @@ RETURNING *;
 SELECT * FROM squad WHERE id = $1;
 
 -- name: GetSquadInWorkspace :one
-SELECT * FROM squad WHERE id = $1 AND (workspace_id = $2 OR is_global = true);
+SELECT * FROM squad WHERE squad.id = $1 AND (squad.workspace_id = $2 OR (squad.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $2 AND w2.inherit_global_items = true)));
 
 -- name: LockSquadForAutopilotAssignment :one
 -- Stabilizes the squad-to-leader resolution while an active Autopilot is
@@ -27,7 +27,7 @@ WHERE id = $1 AND workspace_id = $2
 FOR UPDATE;
 
 -- name: ListSquads :many
-SELECT * FROM squad WHERE (workspace_id = $1 OR is_global = true) AND archived_at IS NULL ORDER BY created_at ASC;
+SELECT * FROM squad WHERE (workspace_id = $1 OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) AND archived_at IS NULL ORDER BY created_at ASC;
 
 -- name: ListSquadMemberPreviewRows :many
 -- Static squad membership summary for list/hover previews. This deliberately
@@ -40,7 +40,7 @@ SELECT
     sm.role
 FROM squad_member sm
 JOIN squad s ON s.id = sm.squad_id
-WHERE (s.workspace_id = $1 OR s.is_global = true) AND s.archived_at IS NULL
+WHERE (s.workspace_id = $1 OR (s.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) AND s.archived_at IS NULL
 ORDER BY
     sm.squad_id ASC,
     (sm.member_type = 'agent' AND sm.member_id = s.leader_id) DESC,
@@ -60,7 +60,7 @@ ORDER BY
     sm.created_at ASC;
 
 -- name: ListAllSquads :many
-SELECT * FROM squad WHERE (workspace_id = $1 OR is_global = true) ORDER BY created_at ASC;
+SELECT * FROM squad WHERE (workspace_id = $1 OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) ORDER BY created_at ASC;
 
 -- name: UpdateSquad :one
 UPDATE squad SET
@@ -106,13 +106,13 @@ SELECT count(*) FROM squad_member WHERE squad_id = $1;
 
 -- name: GetSquadByAssignee :one
 -- Look up the squad when an issue is assigned to a squad.
-SELECT s.* FROM squad s WHERE s.id = $1 AND (s.workspace_id = $2 OR s.is_global = true);
+SELECT s.* FROM squad s WHERE s.id = $1 AND (s.workspace_id = $2 OR (s.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $2 AND w2.inherit_global_items = true)));
 
 -- name: ListSquadsByMember :many
 -- Find all squads a given entity belongs to in a workspace.
 SELECT s.* FROM squad s
 JOIN squad_member sm ON sm.squad_id = s.id
-WHERE (s.workspace_id = $1 OR s.is_global = true) AND sm.member_type = $2 AND sm.member_id = $3
+WHERE (s.workspace_id = $1 OR (s.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) AND sm.member_type = $2 AND sm.member_id = $3
 ORDER BY s.created_at ASC;
 
 -- name: TransferSquadAssignees :exec

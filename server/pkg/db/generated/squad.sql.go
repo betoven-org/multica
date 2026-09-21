@@ -155,7 +155,7 @@ func (q *Queries) GetSquad(ctx context.Context, id pgtype.UUID) (Squad, error) {
 }
 
 const getSquadByAssignee = `-- name: GetSquadByAssignee :one
-SELECT s.id, s.workspace_id, s.name, s.description, s.leader_id, s.creator_id, s.created_at, s.updated_at, s.archived_at, s.archived_by, s.avatar_url, s.instructions, s.is_global FROM squad s WHERE s.id = $1 AND (s.workspace_id = $2 OR s.is_global = true)
+SELECT s.id, s.workspace_id, s.name, s.description, s.leader_id, s.creator_id, s.created_at, s.updated_at, s.archived_at, s.archived_by, s.avatar_url, s.instructions, s.is_global FROM squad s WHERE s.id = $1 AND (s.workspace_id = $2 OR (s.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $2 AND w2.inherit_global_items = true)))
 `
 
 type GetSquadByAssigneeParams struct {
@@ -186,7 +186,7 @@ func (q *Queries) GetSquadByAssignee(ctx context.Context, arg GetSquadByAssignee
 }
 
 const getSquadInWorkspace = `-- name: GetSquadInWorkspace :one
-SELECT id, workspace_id, name, description, leader_id, creator_id, created_at, updated_at, archived_at, archived_by, avatar_url, instructions, is_global FROM squad WHERE id = $1 AND (workspace_id = $2 OR is_global = true)
+SELECT id, workspace_id, name, description, leader_id, creator_id, created_at, updated_at, archived_at, archived_by, avatar_url, instructions, is_global FROM squad WHERE squad.id = $1 AND (squad.workspace_id = $2 OR (squad.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $2 AND w2.inherit_global_items = true)))
 `
 
 type GetSquadInWorkspaceParams struct {
@@ -236,7 +236,7 @@ func (q *Queries) IsSquadMember(ctx context.Context, arg IsSquadMemberParams) (b
 }
 
 const listAllSquads = `-- name: ListAllSquads :many
-SELECT id, workspace_id, name, description, leader_id, creator_id, created_at, updated_at, archived_at, archived_by, avatar_url, instructions, is_global FROM squad WHERE (workspace_id = $1 OR is_global = true) ORDER BY created_at ASC
+SELECT id, workspace_id, name, description, leader_id, creator_id, created_at, updated_at, archived_at, archived_by, avatar_url, instructions, is_global FROM squad WHERE (workspace_id = $1 OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) ORDER BY created_at ASC
 `
 
 func (q *Queries) ListAllSquads(ctx context.Context, workspaceID pgtype.UUID) ([]Squad, error) {
@@ -281,7 +281,7 @@ SELECT
     sm.role
 FROM squad_member sm
 JOIN squad s ON s.id = sm.squad_id
-WHERE (s.workspace_id = $1 OR s.is_global = true) AND s.archived_at IS NULL
+WHERE (s.workspace_id = $1 OR (s.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) AND s.archived_at IS NULL
 ORDER BY
     sm.squad_id ASC,
     (sm.member_type = 'agent' AND sm.member_id = s.leader_id) DESC,
@@ -488,7 +488,7 @@ func (q *Queries) ListSquadMembers(ctx context.Context, squadID pgtype.UUID) ([]
 }
 
 const listSquads = `-- name: ListSquads :many
-SELECT id, workspace_id, name, description, leader_id, creator_id, created_at, updated_at, archived_at, archived_by, avatar_url, instructions, is_global FROM squad WHERE (workspace_id = $1 OR is_global = true) AND archived_at IS NULL ORDER BY created_at ASC
+SELECT id, workspace_id, name, description, leader_id, creator_id, created_at, updated_at, archived_at, archived_by, avatar_url, instructions, is_global FROM squad WHERE (workspace_id = $1 OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) AND archived_at IS NULL ORDER BY created_at ASC
 `
 
 func (q *Queries) ListSquads(ctx context.Context, workspaceID pgtype.UUID) ([]Squad, error) {
@@ -528,7 +528,7 @@ func (q *Queries) ListSquads(ctx context.Context, workspaceID pgtype.UUID) ([]Sq
 const listSquadsByMember = `-- name: ListSquadsByMember :many
 SELECT s.id, s.workspace_id, s.name, s.description, s.leader_id, s.creator_id, s.created_at, s.updated_at, s.archived_at, s.archived_by, s.avatar_url, s.instructions, s.is_global FROM squad s
 JOIN squad_member sm ON sm.squad_id = s.id
-WHERE (s.workspace_id = $1 OR s.is_global = true) AND sm.member_type = $2 AND sm.member_id = $3
+WHERE (s.workspace_id = $1 OR (s.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) AND sm.member_type = $2 AND sm.member_id = $3
 ORDER BY s.created_at ASC
 `
 

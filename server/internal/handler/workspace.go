@@ -95,17 +95,18 @@ func normalizeIssuePrefix(raw string) (string, bool) {
 const issuePrefixFormatError = "issue prefix must be 1-10 uppercase letters or digits"
 
 type WorkspaceResponse struct {
-	ID          string  `json:"id"`
-	Name        string  `json:"name"`
-	Slug        string  `json:"slug"`
-	Description *string `json:"description"`
-	Context     *string `json:"context"`
-	Settings    any     `json:"settings"`
-	Repos       any     `json:"repos"`
-	IssuePrefix string  `json:"issue_prefix"`
-	AvatarURL   *string `json:"avatar_url"`
-	CreatedAt   string  `json:"created_at"`
-	UpdatedAt   string  `json:"updated_at"`
+	ID                 string  `json:"id"`
+	Name               string  `json:"name"`
+	Slug               string  `json:"slug"`
+	Description        *string `json:"description"`
+	Context            *string `json:"context"`
+	Settings           any     `json:"settings"`
+	Repos              any     `json:"repos"`
+	IssuePrefix        string  `json:"issue_prefix"`
+	AvatarURL          *string `json:"avatar_url"`
+	InheritGlobalItems bool    `json:"inherit_global_items"`
+	CreatedAt          string  `json:"created_at"`
+	UpdatedAt          string  `json:"updated_at"`
 }
 
 func (h *Handler) workspaceToResponse(w db.Workspace) WorkspaceResponse {
@@ -124,17 +125,18 @@ func (h *Handler) workspaceToResponse(w db.Workspace) WorkspaceResponse {
 		repos = []any{}
 	}
 	return WorkspaceResponse{
-		ID:          uuidToString(w.ID),
-		Name:        w.Name,
-		Slug:        w.Slug,
-		Description: textToPtr(w.Description),
-		Context:     textToPtr(w.Context),
-		Settings:    settings,
-		Repos:       repos,
-		IssuePrefix: w.IssuePrefix,
-		AvatarURL:   h.resolveAvatarURLPtr(textToPtr(w.AvatarUrl)),
-		CreatedAt:   timestampToString(w.CreatedAt),
-		UpdatedAt:   timestampToString(w.UpdatedAt),
+		ID:                 uuidToString(w.ID),
+		Name:               w.Name,
+		Slug:               w.Slug,
+		Description:        textToPtr(w.Description),
+		Context:            textToPtr(w.Context),
+		Settings:           settings,
+		Repos:              repos,
+		IssuePrefix:        w.IssuePrefix,
+		AvatarURL:          h.resolveAvatarURLPtr(textToPtr(w.AvatarUrl)),
+		InheritGlobalItems: w.InheritGlobalItems,
+		CreatedAt:          timestampToString(w.CreatedAt),
+		UpdatedAt:          timestampToString(w.UpdatedAt),
 	}
 }
 
@@ -199,11 +201,12 @@ func (h *Handler) GetWorkspace(w http.ResponseWriter, r *http.Request) {
 }
 
 type CreateWorkspaceRequest struct {
-	Name        string  `json:"name"`
-	Slug        string  `json:"slug"`
-	Description *string `json:"description"`
-	Context     *string `json:"context"`
-	IssuePrefix *string `json:"issue_prefix"`
+	Name               string  `json:"name"`
+	Slug               string  `json:"slug"`
+	Description        *string `json:"description"`
+	Context            *string `json:"context"`
+	IssuePrefix        *string `json:"issue_prefix"`
+	InheritGlobalItems *bool   `json:"inherit_global_items"`
 }
 
 func (h *Handler) CreateWorkspace(w http.ResponseWriter, r *http.Request) {
@@ -272,12 +275,17 @@ func (h *Handler) CreateWorkspace(w http.ResponseWriter, r *http.Request) {
 	defer tx.Rollback(r.Context())
 
 	qtx := h.Queries.WithTx(tx)
+	inheritGlobal := true
+	if req.InheritGlobalItems != nil {
+		inheritGlobal = *req.InheritGlobalItems
+	}
 	ws, err := qtx.CreateWorkspace(r.Context(), db.CreateWorkspaceParams{
-		Name:        req.Name,
-		Slug:        req.Slug,
-		Description: ptrToText(req.Description),
-		Context:     ptrToText(req.Context),
-		IssuePrefix: issuePrefix,
+		Name:               req.Name,
+		Slug:               req.Slug,
+		Description:        ptrToText(req.Description),
+		Context:            ptrToText(req.Context),
+		IssuePrefix:        issuePrefix,
+		InheritGlobalItems: inheritGlobal,
 	})
 	if err != nil {
 		if isUniqueViolation(err) {
@@ -333,13 +341,14 @@ func (h *Handler) CreateWorkspace(w http.ResponseWriter, r *http.Request) {
 }
 
 type UpdateWorkspaceRequest struct {
-	Name        *string `json:"name"`
-	Description *string `json:"description"`
-	Context     *string `json:"context"`
-	Settings    any     `json:"settings"`
-	Repos       any     `json:"repos"`
-	IssuePrefix *string `json:"issue_prefix"`
-	AvatarURL   *string `json:"avatar_url"`
+	Name               *string `json:"name"`
+	Description        *string `json:"description"`
+	Context            *string `json:"context"`
+	Settings           any     `json:"settings"`
+	Repos              any     `json:"repos"`
+	IssuePrefix        *string `json:"issue_prefix"`
+	AvatarURL          *string `json:"avatar_url"`
+	InheritGlobalItems *bool   `json:"inherit_global_items"`
 }
 
 type workspaceRepoRef struct {
@@ -434,6 +443,9 @@ func (h *Handler) UpdateWorkspace(w http.ResponseWriter, r *http.Request) {
 		if prefix != "" {
 			params.IssuePrefix = pgtype.Text{String: prefix, Valid: true}
 		}
+	}
+	if req.InheritGlobalItems != nil {
+		params.InheritGlobalItems = pgtype.Bool{Bool: *req.InheritGlobalItems, Valid: true}
 	}
 	if req.AvatarURL != nil {
 		// Read the stored value so an unchanged re-send skips revalidation —

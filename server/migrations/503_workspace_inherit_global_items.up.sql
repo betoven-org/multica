@@ -1,0 +1,1 @@
+ALTER TABLE workspace ADD COLUMN IF NOT EXISTS inherit_global_items BOOLEAN NOT NULL DEFAULT true;

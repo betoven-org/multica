@@ -8,14 +8,14 @@
 -- does this workspace actually use". LOWER(name) breaks ties so equal counts
 -- never render in random order.
 SELECT * FROM quick_action
-WHERE (workspace_id = sqlc.arg('workspace_id')::uuid OR is_global = true)
+WHERE (workspace_id = sqlc.arg('workspace_id')::uuid OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = sqlc.arg('workspace_id')::uuid AND w2.inherit_global_items = true)))
   AND (sqlc.arg('include_archived')::bool OR status = 'active')
   AND (visibility = 'public' OR created_by_id = sqlc.arg('viewer_id')::uuid)
 ORDER BY use_count DESC, LOWER(name) ASC;
 
 -- name: GetQuickAction :one
 SELECT * FROM quick_action
-WHERE id = $1 AND (workspace_id = $2 OR is_global = true);
+WHERE quick_action.id = $1 AND (quick_action.workspace_id = $2 OR (quick_action.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $2 AND w2.inherit_global_items = true)));
 
 -- name: CountActiveQuickActions :one
 SELECT COUNT(*) FROM quick_action

@@ -36,6 +36,7 @@ const makeWorkspace = (id: string, slug: string): Workspace => ({
   repos: [],
   issue_prefix: "MUL",
   avatar_url: null,
+  inherit_global_items: true,
   created_at: "2026-01-01T00:00:00Z",
   updated_at: "2026-01-01T00:00:00Z",
 });

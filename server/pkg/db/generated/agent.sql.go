@@ -4069,7 +4069,7 @@ func (q *Queries) GetAgentForUpdate(ctx context.Context, id pgtype.UUID) (Agent,
 
 const getAgentInWorkspace = `-- name: GetAgentInWorkspace :one
 SELECT id, workspace_id, name, avatar_url, runtime_mode, runtime_config, visibility, status, max_concurrent_tasks, owner_id, created_at, updated_at, description, runtime_id, instructions, archived_at, archived_by, custom_env, custom_args, mcp_config, model, thinking_level, composio_toolkit_allowlist, permission_mode, kind, system_key, disabled_runtime_skills, service_tier, conversation_starters, is_global FROM agent
-WHERE id = $1 AND (workspace_id = $2 OR is_global = true) AND kind = 'user'
+WHERE agent.id = $1 AND (agent.workspace_id = $2 OR (agent.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $2 AND w2.inherit_global_items = true))) AND agent.kind = 'user'
 `
 
 type GetAgentInWorkspaceParams struct {
@@ -5525,7 +5525,7 @@ func (q *Queries) ListAgentTasks(ctx context.Context, agentID pgtype.UUID) ([]Ag
 
 const listAgents = `-- name: ListAgents :many
 SELECT id, workspace_id, name, avatar_url, runtime_mode, runtime_config, visibility, status, max_concurrent_tasks, owner_id, created_at, updated_at, description, runtime_id, instructions, archived_at, archived_by, custom_env, custom_args, mcp_config, model, thinking_level, composio_toolkit_allowlist, permission_mode, kind, system_key, disabled_runtime_skills, service_tier, conversation_starters, is_global FROM agent
-WHERE (workspace_id = $1 OR is_global = true) AND archived_at IS NULL AND kind = 'user'
+WHERE (workspace_id = $1 OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) AND archived_at IS NULL AND kind = 'user'
 ORDER BY created_at ASC
 `
 
@@ -5582,7 +5582,7 @@ func (q *Queries) ListAgents(ctx context.Context, workspaceID pgtype.UUID) ([]Ag
 
 const listAllAgents = `-- name: ListAllAgents :many
 SELECT id, workspace_id, name, avatar_url, runtime_mode, runtime_config, visibility, status, max_concurrent_tasks, owner_id, created_at, updated_at, description, runtime_id, instructions, archived_at, archived_by, custom_env, custom_args, mcp_config, model, thinking_level, composio_toolkit_allowlist, permission_mode, kind, system_key, disabled_runtime_skills, service_tier, conversation_starters, is_global FROM agent
-WHERE (workspace_id = $1 OR is_global = true) AND kind = 'user'
+WHERE (workspace_id = $1 OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) AND kind = 'user'
 ORDER BY created_at ASC
 `
 

@@ -1591,6 +1591,7 @@ type Workspace struct {
 	AvatarUrl    pgtype.Text        `json:"avatar_url"`
 	// When TRUE, an agent run that resolves to no precise accountable human (would be owner_fallback) is refused at enqueue instead of degrading to the agent owner (MUL-4302 §3.5). Default FALSE = owner_fallback. Never affects authorization (originator_user_id).
 	AttributionFailClosed bool `json:"attribution_fail_closed"`
+	InheritGlobalItems    bool `json:"inherit_global_items"`
 }
 
 type WorkspaceInvitation struct {

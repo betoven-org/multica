@@ -1,7 +1,8 @@
 -- name: ListWorkspaces :many
 SELECT w.id, w.name, w.slug, w.description, w.settings,
        w.created_at, w.updated_at, w.context, w.repos,
-       w.issue_prefix, w.issue_counter, w.avatar_url, w.attribution_fail_closed
+       w.issue_prefix, w.issue_counter, w.avatar_url, w.attribution_fail_closed,
+       w.inherit_global_items
 FROM member m
 JOIN workspace w ON w.id = m.workspace_id
 WHERE m.user_id = $1
@@ -10,7 +11,8 @@ ORDER BY w.created_at ASC;
 -- name: ListAllWorkspaces :many
 SELECT w.id, w.name, w.slug, w.description, w.settings,
        w.created_at, w.updated_at, w.context, w.repos,
-       w.issue_prefix, w.issue_counter, w.avatar_url, w.attribution_fail_closed
+       w.issue_prefix, w.issue_counter, w.avatar_url, w.attribution_fail_closed,
+       w.inherit_global_items
 FROM workspace w
 ORDER BY w.created_at ASC;
 
@@ -47,8 +49,8 @@ SELECT attribution_fail_closed FROM workspace
 WHERE id = $1;
 
 -- name: CreateWorkspace :one
-INSERT INTO workspace (name, slug, description, context, issue_prefix)
-VALUES ($1, $2, $3, $4, $5)
+INSERT INTO workspace (name, slug, description, context, issue_prefix, inherit_global_items)
+VALUES ($1, $2, $3, $4, $5, $6)
 RETURNING *;
 
 -- name: UpdateWorkspace :one
@@ -60,6 +62,7 @@ UPDATE workspace SET
     repos = COALESCE(sqlc.narg('repos'), repos),
     issue_prefix = COALESCE(sqlc.narg('issue_prefix'), issue_prefix),
     avatar_url = COALESCE(sqlc.narg('avatar_url'), avatar_url),
+    inherit_global_items = COALESCE(sqlc.narg('inherit_global_items'), inherit_global_items),
     updated_at = now()
 WHERE id = $1
 RETURNING *;

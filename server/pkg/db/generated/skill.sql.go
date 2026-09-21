@@ -127,7 +127,7 @@ func (q *Queries) GetSkill(ctx context.Context, id pgtype.UUID) (Skill, error) {
 
 const getSkillByWorkspaceAndName = `-- name: GetSkillByWorkspaceAndName :one
 SELECT id, workspace_id, name, description, content, config, created_by, created_at, updated_at, plugin_installation_id, is_global FROM skill
-WHERE (workspace_id = $1 OR is_global = true) AND name = $2
+WHERE (skill.workspace_id = $1 OR (skill.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) AND skill.name = $2
 `
 
 type GetSkillByWorkspaceAndNameParams struct {
@@ -177,7 +177,7 @@ func (q *Queries) GetSkillFile(ctx context.Context, id pgtype.UUID) (SkillFile, 
 
 const getSkillInWorkspace = `-- name: GetSkillInWorkspace :one
 SELECT id, workspace_id, name, description, content, config, created_by, created_at, updated_at, plugin_installation_id, is_global FROM skill
-WHERE id = $1 AND (workspace_id = $2 OR is_global = true)
+WHERE skill.id = $1 AND (skill.workspace_id = $2 OR (skill.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $2 AND w2.inherit_global_items = true)))
 `
 
 type GetSkillInWorkspaceParams struct {
@@ -387,7 +387,7 @@ const listAgentSkillsByWorkspace = `-- name: ListAgentSkillsByWorkspace :many
 SELECT ask.agent_id, s.id, s.name, s.description, ask.enabled
 FROM agent_skill ask
 JOIN skill s ON s.id = ask.skill_id
-WHERE (s.workspace_id = $1 OR s.is_global = true)
+WHERE (s.workspace_id = $1 OR (s.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true)))
 ORDER BY s.name ASC
 `
 
@@ -563,7 +563,7 @@ func (q *Queries) ListSkillFilesBySkillIDs(ctx context.Context, skillIds []pgtyp
 const listSkillSummariesByWorkspace = `-- name: ListSkillSummariesByWorkspace :many
 SELECT id, workspace_id, name, description, config, created_by, created_at, updated_at
 FROM skill
-WHERE (workspace_id = $1 OR is_global = true)
+WHERE (workspace_id = $1 OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true)))
 ORDER BY name ASC
 `
 
@@ -614,7 +614,7 @@ func (q *Queries) ListSkillSummariesByWorkspace(ctx context.Context, workspaceID
 const listSkillsByWorkspace = `-- name: ListSkillsByWorkspace :many
 
 SELECT id, workspace_id, name, description, content, config, created_by, created_at, updated_at, plugin_installation_id, is_global FROM skill
-WHERE (workspace_id = $1 OR is_global = true)
+WHERE (workspace_id = $1 OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true)))
 ORDER BY name ASC
 `
 

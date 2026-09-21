@@ -34,6 +34,7 @@ function makeWorkspace(slug: string): Workspace {
     repos: [],
     issue_prefix: slug.toUpperCase(),
     avatar_url: null,
+    inherit_global_items: true,
     created_at: "",
     updated_at: "",
   };

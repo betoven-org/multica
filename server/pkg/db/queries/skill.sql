@@ -2,7 +2,7 @@
 
 -- name: ListSkillsByWorkspace :many
 SELECT * FROM skill
-WHERE (workspace_id = $1 OR is_global = true)
+WHERE (workspace_id = $1 OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true)))
 ORDER BY name ASC;
 
 -- name: ListSkillSummariesByWorkspace :many
@@ -12,7 +12,7 @@ ORDER BY name ASC;
 -- and caused 15s CLI timeouts from high-latency regions (GH multica-ai/multica#2174).
 SELECT id, workspace_id, name, description, config, created_by, created_at, updated_at
 FROM skill
-WHERE (workspace_id = $1 OR is_global = true)
+WHERE (workspace_id = $1 OR (is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true)))
 ORDER BY name ASC;
 
 -- name: GetSkill :one
@@ -21,13 +21,13 @@ WHERE id = $1;
 
 -- name: GetSkillInWorkspace :one
 SELECT * FROM skill
-WHERE id = $1 AND (workspace_id = $2 OR is_global = true);
+WHERE skill.id = $1 AND (skill.workspace_id = $2 OR (skill.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $2 AND w2.inherit_global_items = true)));
 
 -- name: GetSkillByWorkspaceAndName :one
 -- Used by skill import and runtime-local skill discovery to reuse a workspace
 -- skill by name rather than violating UNIQUE(workspace_id, name).
 SELECT * FROM skill
-WHERE (workspace_id = $1 OR is_global = true) AND name = $2;
+WHERE (skill.workspace_id = $1 OR (skill.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true))) AND skill.name = $2;
 
 -- name: CreateSkill :one
 INSERT INTO skill (workspace_id, name, description, content, config, created_by)
@@ -166,5 +166,5 @@ DELETE FROM agent_skill WHERE agent_id = $1;
 SELECT ask.agent_id, s.id, s.name, s.description, ask.enabled
 FROM agent_skill ask
 JOIN skill s ON s.id = ask.skill_id
-WHERE (s.workspace_id = $1 OR s.is_global = true)
+WHERE (s.workspace_id = $1 OR (s.is_global = true AND EXISTS(SELECT 1 FROM workspace w2 WHERE w2.id = $1 AND w2.inherit_global_items = true)))
 ORDER BY s.name ASC;
