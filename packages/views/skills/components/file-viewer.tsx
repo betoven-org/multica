@@ -1,10 +1,42 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { Textarea } from "@multica/ui/components/ui/textarea";
 import { parseFrontmatter } from "@multica/core/skills/frontmatter";
+import { useWorkspaceId } from "@multica/core/hooks";
+import { useWorkspacePaths } from "@multica/core/paths";
+import { workspaceKeys } from "@multica/core/workspace/queries";
+import type { SkillSummary } from "@multica/core/types";
 import { RichContent } from "../../rich-content";
 import { useT } from "../../i18n";
+
+/**
+ * Resolves `@skill:skill-name` references in markdown content to actual
+ * workspace-relative URLs. This makes cross-skill links work in any workspace.
+ */
+function useResolveSkillRefs(content: string): string {
+  const wsId = useWorkspaceId();
+  const paths = useWorkspacePaths();
+  const qc = useQueryClient();
+
+  return useMemo(() => {
+    if (!content.includes("@skill:")) return content;
+
+    const skills = qc.getQueryData<SkillSummary[]>(workspaceKeys.skills(wsId));
+    if (!skills?.length) return content;
+
+    const nameToId = new Map(skills.map((s) => [s.name, s.id]));
+
+    return content.replace(
+      /\(@skill:([a-zA-Z0-9/_-]+)\)/g,
+      (_match, name: string) => {
+        const id = nameToId.get(name);
+        return id ? `(${paths.skillDetail(id)})` : `(@skill:${name})`;
+      },
+    );
+  }, [content, wsId, paths, qc]);
+}
 
 /**
  * How the body of the selected file is rendered. Owned by the page, not by
@@ -48,9 +80,10 @@ export function FileViewer({
   const isMd = isMarkdownPath(path);
   const editorRef = useRef<HTMLTextAreaElement>(null);
 
+  const resolvedContent = useResolveSkillRefs(content);
   const body = useMemo(
-    () => (isMd ? parseFrontmatter(content).body : content),
-    [content, isMd],
+    () => (isMd ? parseFrontmatter(resolvedContent).body : resolvedContent),
+    [resolvedContent, isMd],
   );
 
   // The caller flips the mode to raw in the same update that raises this flag,

@@ -15,7 +15,8 @@ export interface Workspace {
   repos: WorkspaceRepo[];
   issue_prefix: string;
   avatar_url: string | null;
-  inherit_global_items: boolean;
+  /** Whether this workspace inherits global agents/skills/squads. Defaults to true when absent (backwards compat). */
+  inherit_global_items?: boolean;
   created_at: string;
   updated_at: string;
 }

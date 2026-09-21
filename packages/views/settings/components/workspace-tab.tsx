@@ -518,7 +518,7 @@ export function WorkspaceTab() {
             >
               <div className="flex justify-start sm:justify-end">
                 <Switch
-                  checked={workspace.inherit_global_items}
+                  checked={workspace.inherit_global_items ?? true}
                   disabled={!canManageWorkspace}
                   onCheckedChange={async (checked) => {
                     try {
