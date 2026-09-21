@@ -67,6 +67,7 @@ services:
     environment:
       - ODUS_MEMORY_DIR=/data/memory
       - FIGMA_TOKEN=${FIGMA_TOKEN:-}
+      - DATABASE_URL=${DATABASE_URL:-postgres://postgres:lrLB9lkKeIcKOnGfiLZi0hYLlQWkTXpyTDl94VuXnHXZaNpTAd4L31jy46k3T91n@gvwoxaj0myyrltulquhovu7x:5432/multica?sslmode=disable}
     networks:
       - coolify
       - default

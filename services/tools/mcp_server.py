@@ -1,5 +1,5 @@
 """
-Odus Tools MCP Server — expõe browser, intake, verify e memory como MCP tools.
+Odus Tools MCP Server — expõe browser, intake, verify, memory e skill como MCP tools.
 
 Roda como stdio MCP server. O daemon do Multica conecta e expõe as tools pros agents.
 
@@ -12,8 +12,11 @@ Tools disponíveis:
   verify_geometry      — compara contrato com browser real
   memory_search        — busca memórias relevantes
   memory_add           — adiciona memória
+  skill_search         — busca skills disponíveis no workspace por query
+  skill_read           — lê conteúdo completo de uma skill pelo nome
 """
 import json
+import os
 import sys
 import tempfile
 from pathlib import Path
@@ -164,7 +167,100 @@ TOOLS = [
             "required": ["content"],
         },
     },
+    {
+        "name": "skill_search",
+        "description": "Search available skills in the workspace by keyword. Returns name and description of matching skills. Use this when you need knowledge about a topic (payments, marketplace, masterdata, etc.) that is not in your currently loaded skills.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string", "description": "Search keyword (e.g. 'payment', 'masterdata', 'marketplace', 'graphql')"},
+            },
+            "required": ["query"],
+        },
+    },
+    {
+        "name": "skill_read",
+        "description": "Read the full content of a skill by its exact name. Use after skill_search to load the knowledge you need. The content is a detailed technical reference — read it before implementing.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string", "description": "Exact skill name as returned by skill_search (e.g. 'vtex/payment-provider-protocol')"},
+            },
+            "required": ["name"],
+        },
+    },
 ]
+
+
+# ── Skill helpers (direct DB access via DATABASE_URL) ──
+
+def _get_db_url():
+    """Resolve DB URL from env. Falls back to backend's DATABASE_URL."""
+    url = os.environ.get("DATABASE_URL", "")
+    if not url:
+        # Try reading from backend's env if on same network
+        url = os.environ.get("SKILL_DATABASE_URL", "")
+    return url
+
+
+def _skill_search(query):
+    """Search skills by keyword in name or description."""
+    try:
+        import psycopg2
+    except ImportError:
+        return json.dumps({"error": "psycopg2 not installed — skill tools unavailable"})
+    db_url = _get_db_url()
+    if not db_url:
+        return json.dumps({"error": "DATABASE_URL not set — skill tools unavailable"})
+    try:
+        conn = psycopg2.connect(db_url)
+        cur = conn.cursor()
+        q = f"%{query.lower()}%"
+        cur.execute(
+            "SELECT name, description, length(content) AS chars "
+            "FROM skill WHERE (LOWER(name) LIKE %s OR LOWER(description) LIKE %s) "
+            "ORDER BY name LIMIT 20",
+            (q, q),
+        )
+        rows = cur.fetchall()
+        cur.close()
+        conn.close()
+        results = [{"name": r[0], "description": r[1], "content_chars": r[2]} for r in rows]
+        return json.dumps({"query": query, "count": len(results), "skills": results})
+    except Exception as e:
+        return json.dumps({"error": f"DB query failed: {str(e)}"})
+
+
+def _skill_read(name):
+    """Read full content of a skill by exact name."""
+    try:
+        import psycopg2
+    except ImportError:
+        return json.dumps({"error": "psycopg2 not installed — skill tools unavailable"})
+    db_url = _get_db_url()
+    if not db_url:
+        return json.dumps({"error": "DATABASE_URL not set — skill tools unavailable"})
+    try:
+        conn = psycopg2.connect(db_url)
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT name, description, content FROM skill WHERE name = %s LIMIT 1",
+            (name,),
+        )
+        row = cur.fetchone()
+        if not row:
+            cur.execute(
+                "SELECT name, description, content FROM skill WHERE name LIKE %s LIMIT 1",
+                (f"%{name}%",),
+            )
+            row = cur.fetchone()
+        cur.close()
+        conn.close()
+        if not row:
+            return json.dumps({"error": f"Skill not found: {name}"})
+        return json.dumps({"name": row[0], "description": row[1], "content": row[2]})
+    except Exception as e:
+        return json.dumps({"error": f"DB query failed: {str(e)}"})
 
 
 # ── Tool execution ──
@@ -249,6 +345,12 @@ def execute_tool(name, args):
             return json.dumps({"available": False})
         mid = mem.add(args["content"], client=args.get("client", ""), stack=args.get("stack", ""), source=args.get("source", "agent"))
         return json.dumps({"available": True, "id": mid})
+
+    elif name == "skill_search":
+        return _skill_search(args["query"])
+
+    elif name == "skill_read":
+        return _skill_read(args["name"])
 
     else:
         return json.dumps({"error": f"Unknown tool: {name}"})
