@@ -1961,10 +1961,25 @@ func (h *Handler) UpdateAgent(w http.ResponseWriter, r *http.Request) {
 		if !ok {
 			return
 		}
+		// For global agents, the runtime may belong to the requesting
+		// workspace (not the agent's home workspace). Try the agent's
+		// workspace first, then fall back to the request workspace.
 		runtime, err := h.Queries.GetAgentRuntimeForWorkspace(r.Context(), db.GetAgentRuntimeForWorkspaceParams{
 			ID:          runtimeUUID,
 			WorkspaceID: existing.WorkspaceID,
 		})
+		if err != nil && existing.IsGlobal {
+			requestWsID := h.resolveWorkspaceID(r)
+			if requestWsID != "" {
+				reqWsUUID, parseOk := parseUUIDOrBadRequest(w, requestWsID, "workspace id")
+				if parseOk {
+					runtime, err = h.Queries.GetAgentRuntimeForWorkspace(r.Context(), db.GetAgentRuntimeForWorkspaceParams{
+						ID:          runtimeUUID,
+						WorkspaceID: reqWsUUID,
+					})
+				}
+			}
+		}
 		if err != nil {
 			writeError(w, http.StatusBadRequest, "invalid runtime_id")
 			return
